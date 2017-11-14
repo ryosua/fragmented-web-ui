@@ -13,6 +13,14 @@ Query the public API at https://api.graph.cool/simple/v1/Fragmented.
 
 `yarn start`
 
+## How To Deploy to Github Pages
+
+I used [this guide](https://medium.freecodecamp.org/surge-vs-github-pages-deploying-a-create-react-app-project-c0ecbf317089) to set up a Github Pages deploy process. If you want to fork and deploy your own UI, then follow those steps. Then you can run:
+
+`yarn predeploy`
+
+`yarn deploy`
+
 ## Contributing
 
 Steps to contribute:
