@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "1.1.0",
+    "apollo-client": "2.0.2",
     "lodash": "4.17.4",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "react-apollo": "2.0.1",
+    "react-dom": "16.1.1",
     "react-scripts": "1.0.17"
   },
   "scripts": {
