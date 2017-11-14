@@ -15,9 +15,6 @@ Query the public API at https://api.graph.cool/simple/v1/Fragmented.
 
 `yarn start`
 
-`npm run build && npm start`
-
-
 ## Contributing
 
 Steps to contribute:
