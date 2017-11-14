@@ -1,9 +1,7 @@
 # fragmented-web-ui
 A decentralized social network for Ethereum enthusiasts.
-
-Fragmented - A decentralized social network for Ethereum enthusiasts.
     
- [Signup](http://www.fragmented.world) to the newsletter for updates.
+[Signup](http://www.fragmented.world) to the newsletter for updates.
 
 Vote and comment on features and bugs on the [Trello development backlog](https://trello.com/b/Wv349ITE/fragmented-development-backlog).
 
