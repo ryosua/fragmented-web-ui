@@ -7,6 +7,7 @@
     "apollo-client": "2.0.2",
     "apollo-link-http": "1.1.0",
     "graphql": "0.11.7",
+    "graphql-tag": "2.5.0",
     "lodash": "4.17.4",
     "react": "^16.1.1",
     "react-apollo": "2.0.1",
