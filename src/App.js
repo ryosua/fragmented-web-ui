@@ -3,8 +3,6 @@ import './App.css'
 import NewsFeedContainer from './containers/NewsFeedContainer'
 import Navbar from './components/Navbar'
 
-const signedIn = false
-
 class App extends Component {
     render() {
         return (

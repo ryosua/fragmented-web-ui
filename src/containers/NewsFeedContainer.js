@@ -5,7 +5,7 @@ import NewsItem from '../components/NewsItem'
 import GetNewsFeed from '../graphql/queries/GetNewsFeed'
 
 const renderHR = (listLength, index) => {
-    if (index != listLength - 1) {
+    if (index !== listLength - 1) {
         return <hr />
     }
 }
@@ -22,9 +22,8 @@ const NewsFeedContainer = props => {
     return (
         <div>
             {map(props.data.allNewsItems, (newsItem, index) => (
-                <div>
+                <div key={newsItem.id}>
                     <NewsItem
-                        key={newsItem.id}
                         id={newsItem.id}
                         text={newsItem.text}
                         title={newsItem.title}
