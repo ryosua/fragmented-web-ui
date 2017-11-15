@@ -4,6 +4,12 @@ import { graphql } from 'react-apollo'
 import NewsItem from '../components/NewsItem'
 import GetNewsFeed from '../graphql/queries/GetNewsFeed'
 
+const renderHR = (listLength, index) => {
+    if (index != listLength - 1) {
+        return <hr />
+    }
+}
+
 const NewsFeedContainer = props => {
     if (props.data && props.data.loading) {
         return <p>Loading...</p>
@@ -15,14 +21,18 @@ const NewsFeedContainer = props => {
 
     return (
         <div>
-            {map(props.data.allNewsItems, newsItem => (
-                <NewsItem
-                    key={newsItem.id}
-                    id={newsItem.id}
-                    text={newsItem.text}
-                    title={newsItem.title}
-                    url={newsItem.url}
-                />
+            {map(props.data.allNewsItems, (newsItem, index) => (
+                <div>
+                    <NewsItem
+                        key={newsItem.id}
+                        id={newsItem.id}
+                        text={newsItem.text}
+                        title={newsItem.title}
+                        url={newsItem.url}
+                        index={index}
+                    />
+                    {renderHR(props.data.allNewsItems.length, index)}
+                </div>
             ))}
         </div>
     )
