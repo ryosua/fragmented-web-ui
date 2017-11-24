@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 
-const NavBar = props => (
+const Navigation = props => (
     <Navbar inverse>
         <Navbar.Header>
             <Navbar.Brand>
@@ -20,4 +20,4 @@ const NavBar = props => (
     </Navbar>
 )
 
-export default NavBar
+export default Navigation
