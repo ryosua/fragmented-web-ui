@@ -5,17 +5,19 @@ import NewsFeedContainer from 'containers/NewsFeedContainer'
 import Navigation from 'components/Navigation'
 import Login from 'components/Login'
 import Signup from 'components/Signup'
+import Submissions from 'components/Submissions'
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navigation />
                 <Router>
                     <div>
+                        <Navigation />
                         <Route exact path="/" component={NewsFeedContainer} />
                         <Route path="/signup" component={Signup} />
                         <Route path="/login" component={Login} />
+                        <Route path="/submissions" component={Submissions} />
                     </div>
                 </Router>
             </div>

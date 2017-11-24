@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const Navigation = props => (
     <Navbar inverse>
@@ -12,9 +13,15 @@ const Navigation = props => (
             <NavItem href="http://www.ryanyosua.me/decentralized-social-network/">About</NavItem>
             <NavItem href="http://www.ryanyosua.me/">Blog</NavItem>
             <NavDropdown title="Account" id="basic-nav-dropdown">
-                <MenuItem>Sign up</MenuItem>
-                <MenuItem>Log in</MenuItem>
-                <MenuItem> Submissions</MenuItem>
+                <LinkContainer to="/signup">
+                    <MenuItem>Sign up</MenuItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                    <MenuItem>Log in</MenuItem>
+                </LinkContainer>
+                <LinkContainer to="/submissions">
+                    <MenuItem> Submissions</MenuItem>
+                </LinkContainer>
             </NavDropdown>
         </Nav>
     </Navbar>
