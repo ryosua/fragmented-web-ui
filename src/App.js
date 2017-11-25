@@ -4,7 +4,7 @@ import 'App.css'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
 import Navigation from 'components/Navigation'
 import Login from 'components/Login'
-import Signup from 'components/Signup'
+import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
                     <div>
                         <Navigation />
                         <Route exact path="/" component={NewsFeedContainer} />
-                        <Route path="/signup" component={Signup} />
+                        <Route path="/signup" component={SignupContainer} />
                         <Route path="/login" component={Login} />
                         <Route path="/submissions" component={Submissions} />
                     </div>
