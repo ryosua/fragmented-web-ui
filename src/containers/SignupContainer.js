@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
 import Signup from 'components/Signup'
+import CreateUser from 'graphql/mutations/CreateUser'
 
 class SignupContainer extends Component {
     constructor(props) {
@@ -15,14 +17,23 @@ class SignupContainer extends Component {
     handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
 
     handleOnSignupPress = () => {
-        const state = {
-            emailAddressValue: '',
-            usernameValue: '',
-            passwordValue: '',
-            confirmPasswordValue: '',
-            userMessage: 'Account Created'
-        }
-        this.setState(state)
+        this.props
+            .mutate(/*{ variables: { repoFullName: 'apollographql/apollo-client' } }*/)
+            .then(({ data }) => {
+                console.log('got data', data)
+                const state = {
+                    emailAddressValue: '',
+                    usernameValue: '',
+                    passwordValue: '',
+                    confirmPasswordValue: '',
+                    userMessage: 'Account Created'
+                }
+                this.setState(state)
+            })
+            .catch(error => {
+                console.log('there was an error sending the query', error)
+                this.setState({ userMessage: error.message })
+            })
     }
 
     render() {
@@ -39,4 +50,4 @@ class SignupContainer extends Component {
     }
 }
 
-export default SignupContainer
+export default graphql(CreateUser)(SignupContainer)
