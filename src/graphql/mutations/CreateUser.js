@@ -1,12 +1,8 @@
 import gql from 'graphql-tag'
 
 const CreateUserMutation = gql`
-    mutation CreateUser {
-        createUser(
-            authProvider: { email: { email: "test@gmail.com", password: "test" } }
-            username: "test"
-            creationTime: "2017-11-24T19:28:49+00:00"
-        ) {
+    mutation CreateUser($authProvider: AuthProviderSignupData!, $username: String!, $creationTime: DateTime!) {
+        createUser(authProvider: $authProvider, username: $username, creationTime: $creationTime) {
             id
         }
     }

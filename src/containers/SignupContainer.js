@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import Signup from 'components/Signup'
 import CreateUser from 'graphql/mutations/CreateUser'
+import AuthProviderSignupData from 'graphql/dtos/AuthProviderSignupData'
 
 class SignupContainer extends Component {
     constructor(props) {
@@ -18,7 +19,13 @@ class SignupContainer extends Component {
 
     handleOnSignupPress = () => {
         this.props
-            .mutate(/*{ variables: { repoFullName: 'apollographql/apollo-client' } }*/)
+            .mutate({
+                variables: {
+                    authProvider: AuthProviderSignupData(this.state.passwordValue, this.state.emailAddressValue),
+                    username: this.state.usernameValue,
+                    creationTime: new Date().toISOString()
+                }
+            })
             .then(({ data }) => {
                 console.log('got data', data)
                 const state = {
