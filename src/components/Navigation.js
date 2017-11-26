@@ -6,7 +6,7 @@ const Navigation = props => (
     <Navbar inverse>
         <Navbar.Header>
             <Navbar.Brand>
-                <a href="/">Fragmented</a>
+                <a href="/newest">Fragmented</a>
             </Navbar.Brand>
         </Navbar.Header>
         <Nav>
