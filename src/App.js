@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
+import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
 import Navigation from 'components/Navigation'
 import Login from 'components/Login'
@@ -15,7 +16,8 @@ class App extends Component {
                 <Router>
                     <div>
                         <Navigation />
-                        <Route exact path="/" component={NewsFeedContainer} />
+                        <Route exact path="/" component={Home} />
+                        <Route path="/newest" component={NewsFeedContainer} />
                         <Route path="/signup" component={SignupContainer} />
                         <Route path="/login" component={Login} />
                         <Route path="/create-post" component={CreateNewsItem} />
