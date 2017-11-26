@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 const GetNewsFeed = gql`
     query GetNewsFeedQuery {
-        allNewsItems {
+        allNewsItems(orderBy: creationTime_DESC) {
             id
             text
             title
