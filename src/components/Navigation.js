@@ -19,8 +19,11 @@ const Navigation = props => (
                 <LinkContainer to="/login">
                     <MenuItem>Log in</MenuItem>
                 </LinkContainer>
+                <LinkContainer to="/create-post">
+                    <MenuItem>Create a Post</MenuItem>
+                </LinkContainer>
                 <LinkContainer to="/submissions">
-                    <MenuItem> Submissions</MenuItem>
+                    <MenuItem>My Posts</MenuItem>
                 </LinkContainer>
             </NavDropdown>
         </Nav>
