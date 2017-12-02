@@ -7,12 +7,10 @@ const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
 const fieldNames = {
     email: 'emailAddressValue',
-    username: 'usernameValue',
-    password: 'passwordValue',
-    confirmPassword: 'confirmPasswordValue'
+    password: 'passwordValue'
 }
 
-const Login = props => {
+const LoginForm = props => {
     const userMesssage = defaultTo(props.userMessage, '')
 
     return (
@@ -22,14 +20,14 @@ const Login = props => {
             <ControlLabel>Email Address</ControlLabel>
             <FormControl
                 type="email"
-                placeholder="Enter email"
+                placeholder="Enter your email"
                 value={props[fieldNames.email]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
             />
             <ControlLabel>Password</ControlLabel>
             <FormControl
                 type="password"
-                placeholder="Enter a password"
+                placeholder="Enter your password"
                 value={props[fieldNames.password]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
             />
@@ -43,7 +41,7 @@ const Login = props => {
     )
 }
 
-Login.propTypes = {
+LoginForm.propTypes = {
     emailAddressValue: PropTypes.string.isRequired,
     passwordValue: PropTypes.string.isRequired,
     handleTextFieldChange: PropTypes.func.isRequired,
@@ -51,4 +49,4 @@ Login.propTypes = {
     userMessage: PropTypes.string
 }
 
-export default Login
+export default LoginForm
