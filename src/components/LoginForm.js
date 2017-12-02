@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ControlLabel, FormControl, Button } from 'react-bootstrap'
-import defaultTo from 'lodash/defaultTo'
+import ErrorComponent from 'util/ErrorHandler'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -11,8 +11,6 @@ const fieldNames = {
 }
 
 const LoginForm = props => {
-    const userMesssage = defaultTo(props.userMessage, '')
-
     return (
         <div>
             <h2>Login</h2>
@@ -36,7 +34,7 @@ const LoginForm = props => {
                 Login
             </Button>
             <br />
-            <p>{userMesssage}</p>
+            {props.hasError && <ErrorComponent error={props.error} />}
         </div>
     )
 }
@@ -46,7 +44,8 @@ LoginForm.propTypes = {
     passwordValue: PropTypes.string.isRequired,
     handleTextFieldChange: PropTypes.func.isRequired,
     handleOnLoginPress: PropTypes.func.isRequired,
-    userMessage: PropTypes.string
+    hasError: PropTypes.bool.isRequired,
+    error: PropTypes.object
 }
 
 export default LoginForm

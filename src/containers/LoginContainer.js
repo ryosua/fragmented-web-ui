@@ -9,7 +9,8 @@ class LoginContainer extends Component {
         super(props)
         this.state = {
             emailAddressValue: '',
-            passwordValue: ''
+            passwordValue: '',
+            hasError: false
         }
     }
 
@@ -29,13 +30,13 @@ class LoginContainer extends Component {
                     usernameValue: '',
                     passwordValue: '',
                     confirmPasswordValue: '',
-                    userMessage: 'Sign In Successful'
+                    hasError: false
                 }
                 this.setState(state)
             })
             .catch(error => {
-                console.log('there was an error sending the query', error)
-                this.setState({ userMessage: error.message })
+                console.log('there was an error sending the query', JSON.stringify(error))
+                this.setState({ hasError: true, error: error })
             })
     }
 
@@ -45,7 +46,9 @@ class LoginContainer extends Component {
             passwordValue: this.state.passwordValue,
             handleTextFieldChange: this.handleTextFieldChange,
             handleOnLoginPress: this.handleOnLoginPress,
-            userMessage: this.state.userMessage
+            userMessage: this.state.userMessage,
+            hasError: this.state.hasError,
+            error: this.state.error
         }
         return <LoginForm {...loginProps} />
     }
