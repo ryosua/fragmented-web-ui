@@ -1,8 +1,8 @@
 import React from 'react'
 import map from 'lodash/map'
 import { graphql } from 'react-apollo'
-import NewsItem from '../components/NewsItem'
-import GetNewsFeed from '../graphql/queries/GetNewsFeed'
+import NewsItem from 'components/NewsItem'
+import GetNewsFeed from 'graphql/queries/GetNewsFeed'
 
 const renderHR = (listLength, index) => {
     if (index !== listLength - 1) {
