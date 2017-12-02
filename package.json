@@ -1,6 +1,5 @@
 {
     "name": "fragmented-web-ui",
-    "homepage": "https://ryosua.github.io/fragmented-web-ui",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
