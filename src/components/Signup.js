@@ -17,6 +17,8 @@ const Signup = props => {
 
     return (
         <div>
+            <h2>Signup</h2>
+            <br />
             <ControlLabel>Email Address</ControlLabel>
             <FormControl
                 type="email"
