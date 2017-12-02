@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-import Signup from 'components/Signup'
-import CreateUser from 'graphql/mutations/CreateUser'
-import AuthProviderSignupData from 'graphql/dtos/AuthProviderSignupData'
+import Signup from '../components/Signup'
+import CreateUser from '../graphql/mutations/CreateUser'
+import AuthProviderSignupData from '../graphql/dtos/AuthProviderSignupData'
 
 class SignupContainer extends Component {
     constructor(props) {
