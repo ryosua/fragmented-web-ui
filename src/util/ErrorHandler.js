@@ -5,14 +5,15 @@ import get from 'lodash/get'
 const DEFAULT_ERROR_CODE = -1
 
 const graphQLErrorCodes = {
-    DEFAULT_ERROR_CODE: 'Something went wrong, sorry about that.',
+    [DEFAULT_ERROR_CODE]: 'Something went wrong, sorry about that.',
     3022: 'The email address or password you entered is incorrect. Please try again.',
     3023: 'That username or email is already taken. Please choose another one.'
 }
 
 const getErrorMessage = error => {
     const errorCode = get(error, 'graphQLErrors[0].code', DEFAULT_ERROR_CODE)
-    return graphQLErrorCodes[errorCode]
+    const errorMessage = graphQLErrorCodes[errorCode]
+    return errorMessage
 }
 
 const ErrorComponent = ({ error, errorMessage }) => {

@@ -7,7 +7,7 @@ import Navigation from 'components/Navigation'
 import LoginContainer from 'containers/LoginContainer'
 import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
-import CreateNewsItem from 'components/CreateNewsItem'
+import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
 
 class App extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class App extends Component {
                             path="/login"
                             render={() => <LoginContainer onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />}
                         />
-                        <Route path="/create-post" component={CreateNewsItem} />
+                        <Route path="/create-post" component={CreateNewsItemContainer} />
                         <Route path="/submissions" component={Submissions} />
                     </div>
                 </Router>
