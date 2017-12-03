@@ -24,12 +24,16 @@ const Navigation = props => (
                         <MenuItem>Log in</MenuItem>
                     </LinkContainer>
                 )}
-                <LinkContainer to="/create-post">
-                    <MenuItem>Create a Post</MenuItem>
-                </LinkContainer>
-                <LinkContainer to="/submissions">
-                    <MenuItem>My Posts</MenuItem>
-                </LinkContainer>
+                {props.isLoggedIn && (
+                    <LinkContainer to="/create-post">
+                        <MenuItem>Create a Post</MenuItem>
+                    </LinkContainer>
+                )}
+                {props.isLoggedIn && (
+                    <LinkContainer to="/submissions">
+                        <MenuItem>My Posts</MenuItem>
+                    </LinkContainer>
+                )}
             </NavDropdown>
         </Nav>
     </Navbar>
