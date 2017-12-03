@@ -49,7 +49,6 @@ class LoginContainer extends Component {
             passwordValue: this.state.passwordValue,
             handleTextFieldChange: this.handleTextFieldChange,
             handleOnLoginPress: this.handleOnLoginPress,
-            userMessage: this.state.userMessage,
             hasError: this.state.hasError,
             error: this.state.error
         }
