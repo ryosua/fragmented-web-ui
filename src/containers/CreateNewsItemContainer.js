@@ -23,7 +23,7 @@ class CreateNewsItemContainer extends React.Component {
                     userId: 'test',
                     creationTime: new Date(),
                     title: this.state.titleValue,
-                    urlValue: this.state.urlValue
+                    url: this.state.urlValue
                 }
             })
             .then(({ data }) => {
