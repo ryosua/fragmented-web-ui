@@ -3,6 +3,14 @@ import { graphql } from 'react-apollo'
 import Signup from 'components/Signup'
 import CreateUser from 'graphql/mutations/CreateUser'
 import AuthProviderSignupData from 'graphql/dtos/AuthProviderSignupData'
+import text from 'util/text'
+
+const clientErrorMessages = text.clientErrorMessages
+
+const validatePasswordsMatch = (passwordValue, confirmPasswordValue) => passwordValue === confirmPasswordValue
+const validateEmail = email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+const MINIMUM_CHARACTERS_FOR_PASSWORDS = 9
+const validatePasswordRequirementsMet = password => password.length >= MINIMUM_CHARACTERS_FOR_PASSWORDS
 
 class SignupContainer extends Component {
     constructor(props) {
@@ -11,13 +19,37 @@ class SignupContainer extends Component {
             emailAddressValue: '',
             usernameValue: '',
             passwordValue: '',
-            confirmPasswordValue: ''
+            confirmPasswordValue: '',
+            hasError: false
         }
     }
 
-    handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
+    handleTextFieldChange = (e, fieldName) => {
+        this.setState({ [fieldName]: e.target.value })
+    }
 
     handleOnSignupPress = () => {
+        const validEmail = validateEmail(this.state.emailAddressValue)
+        if (!validEmail) {
+            this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidEmail })
+            return
+        }
+
+        const passwordRequirementsMet = validatePasswordRequirementsMet(this.state.passwordValue)
+        if (!passwordRequirementsMet) {
+            this.setState({
+                hasError: true,
+                errorMessage: clientErrorMessages.passwordTooShort(MINIMUM_CHARACTERS_FOR_PASSWORDS)
+            })
+            return
+        }
+
+        const passwordsMatch = validatePasswordsMatch(this.state.passwordValue, this.state.confirmPasswordValue)
+        if (!passwordsMatch) {
+            this.setState({ hasError: true, errorMessage: clientErrorMessages.passwordAndConfirmPasswordDontMatch })
+            return
+        }
+
         this.props
             .mutate({
                 variables: {
@@ -33,13 +65,14 @@ class SignupContainer extends Component {
                     usernameValue: '',
                     passwordValue: '',
                     confirmPasswordValue: '',
-                    userMessage: 'Account Created'
+                    hasError: false,
+                    signupSuccessful: true
                 }
                 this.setState(state)
             })
             .catch(error => {
                 console.log('there was an error sending the query', error)
-                this.setState({ userMessage: error.message })
+                this.setState({ hasError: true, error: error })
             })
     }
 
@@ -51,7 +84,10 @@ class SignupContainer extends Component {
             confirmPasswordValue: this.state.confirmPasswordValue,
             handleTextFieldChange: this.handleTextFieldChange,
             handleOnSignupPress: this.handleOnSignupPress,
-            userMessage: this.state.userMessage
+            hasError: this.state.hasError,
+            error: this.state.error,
+            errorMessage: this.state.errorMessage,
+            signupSuccessful: this.state.signupSuccessful
         }
         return <Signup {...signUpProps} />
     }

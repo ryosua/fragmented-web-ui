@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ControlLabel, FormControl, Button } from 'react-bootstrap'
 import defaultTo from 'lodash/defaultTo'
+import ErrorComponent from 'util/ErrorHandler'
+import { Redirect } from 'react-router'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -13,7 +15,9 @@ const fieldNames = {
 }
 
 const Signup = props => {
-    const userMesssage = defaultTo(props.userMessage, '')
+    if (props.signupSuccessful) {
+        return <Redirect to="/login" />
+    }
 
     return (
         <div>
@@ -52,7 +56,7 @@ const Signup = props => {
                 Create Account
             </Button>
             <br />
-            <p>{userMesssage}</p>
+            {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
         </div>
     )
 }
@@ -64,7 +68,10 @@ Signup.propTypes = {
     confirmPasswordValue: PropTypes.string.isRequired,
     handleTextFieldChange: PropTypes.func.isRequired,
     handleOnSignupPress: PropTypes.func.isRequired,
-    userMessage: PropTypes.string
+    hasError: PropTypes.bool.isRequired,
+    error: PropTypes.object,
+    errorMessage: PropTypes.string,
+    signupSuccessful: PropTypes.bool
 }
 
 export default Signup
