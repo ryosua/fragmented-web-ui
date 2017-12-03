@@ -21,7 +21,7 @@ class SignupContainer extends Component {
         this.props
             .mutate({
                 variables: {
-                    authProvider: AuthProviderSignupData(this.state.passwordValue, this.state.emailAddressValue),
+                    authProvider: AuthProviderSignupData(this.state.emailAddressValue, this.state.passwordValue),
                     username: this.state.usernameValue,
                     creationTime: new Date().toISOString()
                 }
