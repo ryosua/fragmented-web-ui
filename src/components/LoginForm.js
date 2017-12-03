@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ControlLabel, FormControl, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import ErrorComponent from 'util/ErrorHandler'
+import FormField from 'components/FormField'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -15,15 +16,15 @@ const LoginForm = props => {
         <div>
             <h2>Login</h2>
             <br />
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
+            <FormField
+                label="Email Address"
                 type="email"
                 placeholder="Enter your email"
                 value={props[fieldNames.email]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
             />
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+            <FormField
+                label="Password"
                 type="password"
                 placeholder="Enter your password"
                 value={props[fieldNames.password]}

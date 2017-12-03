@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ControlLabel, FormControl, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import ErrorComponent from 'util/ErrorHandler'
 import { Redirect } from 'react-router'
+import FormField from 'components/FormField'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -22,29 +23,29 @@ const Signup = props => {
         <div>
             <h2>Signup</h2>
             <br />
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
+            <FormField
+                label="Email Address"
                 type="email"
                 placeholder="Enter email"
                 value={props[fieldNames.email]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
             />
-            <ControlLabel>Public Username</ControlLabel>
-            <FormControl
+            <FormField
+                label="Public Username"
                 type="text"
                 placeholder="Enter a username"
                 value={props[fieldNames.username]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.username)}
             />
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
+            <FormField
+                label="Password"
                 type="password"
                 placeholder="Enter a password"
                 value={props[fieldNames.password]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
             />
-            <ControlLabel>Confirm Password</ControlLabel>
-            <FormControl
+            <FormField
+                label="Confirm Your Password"
                 type="password"
                 placeholder="Confirm your password"
                 value={props[fieldNames.confirmPassword]}
