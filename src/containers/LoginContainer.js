@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
+import { Redirect } from 'react-router'
 import LoginForm from 'components/LoginForm'
 import Login from 'graphql/mutations/Login'
 import AuthProviderLoginData from 'graphql/dtos/AuthProviderLoginData'
@@ -33,6 +35,7 @@ class LoginContainer extends Component {
                     hasError: false
                 }
                 this.setState(state)
+                this.props.onLogin(data)
             })
             .catch(error => {
                 console.log('there was an error sending the query', JSON.stringify(error))
@@ -50,8 +53,13 @@ class LoginContainer extends Component {
             hasError: this.state.hasError,
             error: this.state.error
         }
-        return <LoginForm {...loginProps} />
+        return this.props.isLoggedIn ? <Redirect to="/newest" /> : <LoginForm {...loginProps} />
     }
+}
+
+LoginContainer.propTypes = {
+    onLogin: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired
 }
 
 export default graphql(Login)(LoginContainer)
