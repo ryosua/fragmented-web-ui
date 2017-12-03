@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ControlLabel, FormControl, Button } from 'react-bootstrap'
-import defaultTo from 'lodash/defaultTo'
 import ErrorComponent from 'util/ErrorHandler'
 import { Redirect } from 'react-router'
 
