@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
 import ErrorComponent from 'util/ErrorHandler'
 import { Redirect } from 'react-router'
 import FormField from 'components/FormField'
+import ActionButton from 'components/ActionButton'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -52,9 +52,7 @@ const Signup = props => {
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.confirmPassword)}
             />
             <br />
-            <Button type="submit" onClick={props.handleOnSignupPress}>
-                Create Account
-            </Button>
+            <ActionButton label="Create Account" onClick={props.handleOnSignupPress} />
             <br />
             {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
         </div>

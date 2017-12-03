@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
 import ErrorComponent from 'util/ErrorHandler'
 import FormField from 'components/FormField'
+import ActionButton from 'components/ActionButton'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -31,9 +31,7 @@ const LoginForm = props => {
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
             />
             <br />
-            <Button type="submit" onClick={props.handleOnLoginPress}>
-                Login
-            </Button>
+            <ActionButton label="Login" onClick={props.handleOnLoginPress} />
             <br />
             {props.hasError && <ErrorComponent error={props.error} />}
         </div>
