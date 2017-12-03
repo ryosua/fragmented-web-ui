@@ -9,10 +9,10 @@ const NewsItem = props => (
 
 NewsItem.propTypes = {
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    text: PropTypes.string
 }
 
 export default NewsItem
