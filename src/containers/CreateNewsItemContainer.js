@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 import { graphql } from 'react-apollo'
 import CreateLinkNewsItem from 'graphql/mutations/CreateLinkNewsItem'
@@ -20,7 +21,7 @@ class CreateNewsItemContainer extends React.Component {
         this.props
             .mutate({
                 variables: {
-                    userId: 'test',
+                    userId: this.props.userId,
                     creationTime: new Date(),
                     title: this.state.titleValue,
                     url: this.state.urlValue
@@ -46,12 +47,17 @@ class CreateNewsItemContainer extends React.Component {
             hasError: this.state.hasError,
             error: this.state.error
         }
-        return this.props.isLoggedIn || this.state.postSubmitted ? (
+        return !this.props.isLoggedIn || this.state.postSubmitted ? (
             <Redirect to="/newest" />
         ) : (
             <CreateLinkNewsItemForm {...createNewsItemProps} />
         )
     }
+}
+
+CreateNewsItemContainer.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    userId: PropTypes.string
 }
 
 export default graphql(CreateLinkNewsItem)(CreateNewsItemContainer)

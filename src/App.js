@@ -18,7 +18,8 @@ class App extends Component {
 
     onLogin = data => {
         localStorage.setItem('token', data.signinUser.token)
-        this.setState({ isLoggedIn: true })
+        const userId = data.signinUser.user.id
+        this.setState({ isLoggedIn: true, userId: userId })
     }
 
     render() {
@@ -34,7 +35,15 @@ class App extends Component {
                             path="/login"
                             render={() => <LoginContainer onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />}
                         />
-                        <Route path="/create-post" component={CreateNewsItemContainer} />
+                        <Route
+                            path="/create-post"
+                            render={() => (
+                                <CreateNewsItemContainer
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    userId={this.state.userId}
+                                />
+                            )}
+                        />
                         <Route path="/submissions" component={Submissions} />
                     </div>
                 </Router>
