@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import defaultTo from 'lodash/defaultTo'
 
 const DEFAULT_ERROR_CODE = -1
 
 const graphQLErrorCodes = {
     [DEFAULT_ERROR_CODE]: 'Something went wrong, sorry about that.',
     3022: 'The email address or password you entered is incorrect. Please try again.',
-    3023: 'That username or email is already taken. Please choose another one.'
+    3023: 'That username or email is already taken. Please choose another one.',
+    3008: "You don't have permission to do that. Try signing out and signing back in."
 }
 
 const getErrorMessage = error => {
     const errorCode = get(error, 'graphQLErrors[0].code', DEFAULT_ERROR_CODE)
-    const errorMessage = graphQLErrorCodes[errorCode]
+    const errorMessage = defaultTo(graphQLErrorCodes[errorCode], graphQLErrorCodes[DEFAULT_ERROR_CODE])
     return errorMessage
 }
 
