@@ -8,17 +8,23 @@ import LoginContainer from 'containers/LoginContainer'
 import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
 import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
+import isEmpty from 'lodash/isEmpty'
 
 class App extends Component {
     constructor(props) {
         super(props)
         const token = localStorage.getItem('token')
-        this.state = { isLoggedIn: token ? true : false }
+        const userId = localStorage.getItem('userId')
+        const isLoggedIn = !isEmpty(token) && !isEmpty(userId)
+        this.state = { isLoggedIn: isLoggedIn, userId: isLoggedIn ? userId : undefined }
+
+        console.log(isLoggedIn)
     }
 
     onLogin = data => {
-        localStorage.setItem('token', data.signinUser.token)
         const userId = data.signinUser.user.id
+        localStorage.setItem('token', data.signinUser.token)
+        localStorage.setItem('userId', userId)
         this.setState({ isLoggedIn: true, userId: userId })
     }
 
