@@ -2,8 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 import { graphql } from 'react-apollo'
+import text from 'util/text'
 import CreateLinkNewsItem from 'graphql/mutations/CreateLinkNewsItem'
 import CreateLinkNewsItemForm from 'components/CreateLinkNewsItemForm'
+
+const clientErrorMessages = text.clientErrorMessages
+
+const validateEntry = value => value !== ''
 
 class CreateNewsItemContainer extends React.Component {
     constructor(props) {
@@ -18,6 +23,18 @@ class CreateNewsItemContainer extends React.Component {
     handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
 
     handleSubmitPress = () => {
+        const validTitle = validateEntry(this.state.titleValue)
+        if (!validTitle) {
+            this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidTitle })
+            return
+        }
+
+        const urlValue = validateEntry(this.state.urlValue)
+        if (!urlValue) {
+            this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidUrl })
+            return
+        }
+
         this.props
             .mutate({
                 variables: {
@@ -45,7 +62,8 @@ class CreateNewsItemContainer extends React.Component {
             handleTextFieldChange: this.handleTextFieldChange,
             handleSubmitPress: this.handleSubmitPress,
             hasError: this.state.hasError,
-            error: this.state.error
+            error: this.state.error,
+            errorMessage: this.state.errorMessage
         }
         return !this.props.isLoggedIn || this.state.postSubmitted ? (
             <Redirect to="/newest" />

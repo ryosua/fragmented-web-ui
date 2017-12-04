@@ -33,7 +33,7 @@ const CreateLinkNewsItemForm = props => {
             <br />
             <ActionButton label="Submit" onClick={props.handleSubmitPress} />
             <br />
-            {props.hasError && <ErrorComponent error={props.error} />}
+            {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
         </div>
     )
 }
@@ -44,7 +44,8 @@ CreateLinkNewsItemForm.propTypes = {
     handleTextFieldChange: PropTypes.func.isRequired,
     handleSubmitPress: PropTypes.func.isRequired,
     hasError: PropTypes.bool.isRequired,
-    error: PropTypes.object
+    error: PropTypes.object,
+    errorMessage: PropTypes.string
 }
 
 export default CreateLinkNewsItemForm
