@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
+import isEmpty from 'lodash/isEmpty'
 import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
 import Navigation from 'components/Navigation'
@@ -8,7 +9,7 @@ import LoginContainer from 'containers/LoginContainer'
 import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
 import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
-import isEmpty from 'lodash/isEmpty'
+import Logout from 'components/Logout'
 
 class App extends Component {
     constructor(props) {
@@ -26,6 +27,12 @@ class App extends Component {
         localStorage.setItem('token', data.signinUser.token)
         localStorage.setItem('userId', userId)
         this.setState({ isLoggedIn: true, userId: userId })
+    }
+
+    onLogout = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
+        this.setState({ isLoggedIn: false, userId: undefined })
     }
 
     render() {
@@ -51,6 +58,7 @@ class App extends Component {
                             )}
                         />
                         <Route path="/submissions" component={Submissions} />
+                        <Route path="/logout" render={() => <Logout onLogout={this.onLogout} />} />
                     </div>
                 </Router>
             </div>

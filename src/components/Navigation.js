@@ -34,6 +34,11 @@ const Navigation = props => (
                         <MenuItem>My Posts</MenuItem>
                     </LinkContainer>
                 )}
+                {props.isLoggedIn && (
+                    <LinkContainer to="/logout">
+                        <MenuItem>Logout</MenuItem>
+                    </LinkContainer>
+                )}
             </NavDropdown>
         </Nav>
     </Navbar>
