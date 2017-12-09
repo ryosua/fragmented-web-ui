@@ -5,10 +5,6 @@ const CreateLinkNewsItem = gql`
         createNewsItem(userId: $userId, creationTime: $creationTime, title: $title, url: $url) {
             __typename
             id
-            text
-            title
-            url
-            type
         }
     }
 `
