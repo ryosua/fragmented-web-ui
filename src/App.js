@@ -18,8 +18,6 @@ class App extends Component {
         const userId = localStorage.getItem('userId')
         const isLoggedIn = !isEmpty(token) && !isEmpty(userId)
         this.state = { isLoggedIn: isLoggedIn, userId: isLoggedIn ? userId : undefined }
-
-        console.log(isLoggedIn)
     }
 
     onLogin = data => {
