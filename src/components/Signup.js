@@ -4,6 +4,7 @@ import ErrorComponent from 'util/ErrorHandler'
 import { Redirect } from 'react-router'
 import FormField from 'components/FormField'
 import ActionButton from 'components/ActionButton'
+import text from 'util/text'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -21,33 +22,33 @@ const Signup = props => {
 
     return (
         <div>
-            <h2>Signup</h2>
+            <h2>{text.Signup.title}</h2>
             <br />
             <FormField
-                label="Email Address"
+                label={text.Signup.emailLabel}
                 type="email"
-                placeholder="Enter email"
+                placeholder={text.Signup.emailPlaceholder}
                 value={props[fieldNames.email]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
             />
             <FormField
-                label="Public Username"
+                label={text.Signup.username}
                 type="text"
-                placeholder="Enter a username"
+                placeholder={text.Signup.usernamePlaceholder}
                 value={props[fieldNames.username]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.username)}
             />
             <FormField
-                label="Password"
+                label={text.Signup.passwordLabel}
                 type="password"
-                placeholder="Enter a password"
+                placeholder={text.Signup.passwordPlaceholder}
                 value={props[fieldNames.password]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
             />
             <FormField
-                label="Confirm Your Password"
+                label={text.Signup.passwordConfirmationLabel}
                 type="password"
-                placeholder="Confirm your password"
+                placeholder={text.Signup.passwordConfirmationPlaceholder}
                 value={props[fieldNames.confirmPassword]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.confirmPassword)}
             />

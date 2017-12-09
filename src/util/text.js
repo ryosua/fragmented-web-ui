@@ -17,6 +17,17 @@ const text = {
         passwordLabel: 'Password',
         passwordPlaceholder: 'Enter your password'
     },
+    Signup: {
+        title: 'Signup',
+        emailLabel: 'Email Address',
+        emailPlaceholder: 'Enter your email',
+        username: 'Public Username',
+        usernamePlaceholder: 'Enter a username',
+        passwordLabel: 'Password',
+        passwordPlaceholder: 'Enter a password',
+        passwordConfirmationLabel: 'Confirm your password',
+        passwordConfirmationPlaceholder: 'Confirm your password'
+    },
     NewsFeed: {
         loading: 'Getting posts...'
     }
