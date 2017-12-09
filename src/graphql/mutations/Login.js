@@ -5,6 +5,7 @@ const CreateUserMutation = gql`
         signinUser(email: $email) {
             token
             user {
+                __typename
                 id
             }
         }
