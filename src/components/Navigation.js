@@ -2,41 +2,42 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import text from 'util/text'
 
 const Navigation = props => (
     <Navbar inverse>
         <Navbar.Header>
             <Navbar.Brand>
-                <a href="/newest">Fragmented</a>
+                <a href="/newest">{text.app.name}</a>
             </Navbar.Brand>
         </Navbar.Header>
         <Nav>
-            <NavItem href="http://www.ryanyosua.me/decentralized-social-network/">About</NavItem>
-            <NavItem href="http://www.ryanyosua.me/">Blog</NavItem>
+            <NavItem href="http://www.ryanyosua.me/decentralized-social-network/">{text.app.aboutLinkText}</NavItem>
+            <NavItem href="http://www.ryanyosua.me/">{text.app.blogLinkText}</NavItem>
             <NavDropdown title="Account" id="basic-nav-dropdown">
                 {!props.isLoggedIn && (
                     <LinkContainer to="/signup">
-                        <MenuItem>Sign up</MenuItem>
+                        <MenuItem>{text.Signup.title}</MenuItem>
                     </LinkContainer>
                 )}
                 {!props.isLoggedIn && (
                     <LinkContainer to="/login">
-                        <MenuItem>Log in</MenuItem>
+                        <MenuItem>{text.Login.title}</MenuItem>
                     </LinkContainer>
                 )}
                 {props.isLoggedIn && (
                     <LinkContainer to="/create-post">
-                        <MenuItem>Create a Post</MenuItem>
+                        <MenuItem>{text.Posting.title}</MenuItem>
                     </LinkContainer>
                 )}
                 {props.isLoggedIn && (
                     <LinkContainer to="/submissions">
-                        <MenuItem>My Posts</MenuItem>
+                        <MenuItem>{text.Submissions.title}</MenuItem>
                     </LinkContainer>
                 )}
                 {props.isLoggedIn && (
                     <LinkContainer to="/logout">
-                        <MenuItem>Logout</MenuItem>
+                        <MenuItem>{text.app.logout}</MenuItem>
                     </LinkContainer>
                 )}
             </NavDropdown>

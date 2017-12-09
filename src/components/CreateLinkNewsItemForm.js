@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ErrorComponent from 'util/ErrorHandler'
 import FormField from 'components/FormField'
 import ActionButton from 'components/ActionButton'
+import text from 'util/text'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -14,7 +15,7 @@ const fieldNames = {
 const CreateLinkNewsItemForm = props => {
     return (
         <div>
-            <h2>Submit a Post</h2>
+            <h2>{text.Posting.title}</h2>
             <br />
             <FormField
                 label="Title"

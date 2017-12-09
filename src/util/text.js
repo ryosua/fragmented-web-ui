@@ -1,4 +1,10 @@
 const text = {
+    app: {
+        name: 'Fragmented',
+        logout: 'Logout',
+        aboutLinkText: 'About',
+        blogLinkText: 'Blog'
+    },
     clientErrorMessages: {
         passwordAndConfirmPasswordDontMatch: "The passwords that you entered don't match. Please try again.",
         invalidEmail: 'The email that you entered is invalid. Please try again.',
@@ -30,6 +36,12 @@ const text = {
     },
     NewsFeed: {
         loading: 'Getting posts...'
+    },
+    Posting: {
+        title: 'Create a Post'
+    },
+    Submissions: {
+        title: 'My posts'
     }
 }
 
