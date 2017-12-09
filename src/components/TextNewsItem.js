@@ -1,5 +1,8 @@
 import React from 'react'
 import isEmpty from 'lodash/isEmpty'
+import { graphql } from 'react-apollo'
+import queryString from 'query-string'
+import GetNewsItem from 'graphql/queries/GetNewsItem'
 
 const renderNewsItem = params => {
     const { title, text } = params
@@ -11,10 +14,29 @@ const renderNewsItem = params => {
     )
 }
 
-const TextNewsItem = props => {
-    const state = props.location.state
-    const hasState = !isEmpty(state)
-    return renderNewsItem(state)
+const Loading = () => <p>Loading news item...</p>
+const Error = () => {
+    return <p>Error</p>
 }
 
-export default TextNewsItem
+const hasState = state => !isEmpty(state)
+
+const TextNewsItem = props => {
+    const state = props.location.state
+    const isLoading = props.data && props.data.loading
+
+    if (hasState(state)) {
+        return renderNewsItem(state)
+    } else if (isLoading) {
+        return <Loading />
+    } else if (props.data && props.data.error) {
+        return <Error error={props.data.error} />
+    }
+
+    return renderNewsItem(props.data.NewsItem)
+}
+
+export default graphql(GetNewsItem, {
+    options: ({ location }) => ({ variables: { id: queryString.parse(location.search).id } }),
+    skip: ownProps => hasState(ownProps.location.state)
+})(TextNewsItem)
