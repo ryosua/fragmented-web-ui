@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ErrorComponent from 'util/ErrorHandler'
 import FormField from 'components/FormField'
 import ActionButton from 'components/ActionButton'
+import text from 'util/text'
 
 const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
@@ -14,19 +15,19 @@ const fieldNames = {
 const LoginForm = props => {
     return (
         <div>
-            <h2>Login</h2>
+            <h2>{text.Login.title}</h2>
             <br />
             <FormField
-                label="Email Address"
+                label={text.Login.emailLabel}
                 type="email"
-                placeholder="Enter your email"
+                placeholder={text.Login.emailPlaceholder}
                 value={props[fieldNames.email]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
             />
             <FormField
-                label="Password"
+                label={text.Login.passwordLabel}
                 type="password"
-                placeholder="Enter your password"
+                placeholder={text.Login.passwordPlaceholder}
                 value={props[fieldNames.password]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
             />

@@ -3,6 +3,7 @@ import map from 'lodash/map'
 import { graphql } from 'react-apollo'
 import NewsItem from 'components/NewsItem'
 import GetNewsFeed from 'graphql/queries/GetNewsFeed'
+import text from 'util/text'
 
 const renderHR = (listLength, index) => {
     if (index !== listLength - 1) {
@@ -12,11 +13,11 @@ const renderHR = (listLength, index) => {
 
 const NewsFeedContainer = props => {
     if (props.data && props.data.loading) {
-        return <p>Loading...</p>
+        return <p>{text.NewsFeed.loading}</p>
     }
 
     if (props.data && props.data.error) {
-        return <p>Something went horribly wrong.</p>
+        return <p> {text.networkErrorMessages.newsFeedLoad}</p>
     }
 
     return (

@@ -6,6 +6,19 @@ const text = {
             `Please use a longer password. The minimum length is ${minimumPasswordLength}.`,
         invalidTitle: 'Titles cannot be blank',
         invalidUrl: 'Links cannot be blank'
+    },
+    networkErrorMessages: {
+        newsFeedLoad: 'There was an error getting posts. Please refresh to try again'
+    },
+    Login: {
+        title: 'Login',
+        emailLabel: 'Email Address',
+        emailPlaceholder: 'Enter your email',
+        passwordLabel: 'Password',
+        passwordPlaceholder: 'Enter your password'
+    },
+    NewsFeed: {
+        loading: 'Getting posts...'
     }
 }
 
