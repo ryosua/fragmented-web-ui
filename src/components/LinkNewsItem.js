@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const NewsItem = props => (
+const LinkNewsItem = props => (
     <h2>
         <a href={props.url}>{`${props.index + 1}. ${props.title}`}</a>
     </h2>
 )
 
-NewsItem.propTypes = {
+LinkNewsItem.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
-    text: PropTypes.string
+    url: PropTypes.string.isRequired
 }
 
-export default NewsItem
+export default LinkNewsItem

@@ -7,6 +7,7 @@ const GetNewsFeed = gql`
             text
             title
             url
+            type
         }
     }
 `
