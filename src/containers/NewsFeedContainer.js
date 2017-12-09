@@ -2,7 +2,7 @@ import React from 'react'
 import map from 'lodash/map'
 import { graphql } from 'react-apollo'
 import LinkNewsItem from 'components/LinkNewsItem'
-import TextNewsItem from 'components/TextNewsItem'
+import TextNewsItemFeedItem from 'components/TextNewsItemFeedItem'
 import GetNewsFeed from 'graphql/queries/GetNewsFeed'
 import text from 'util/text'
 
@@ -28,7 +28,12 @@ const NewsFeedContainer = props => {
                     {newsItem.type === 'LINK' ? (
                         <LinkNewsItem id={newsItem.id} title={newsItem.title} index={index} url={newsItem.url} />
                     ) : (
-                        <TextNewsItem id={newsItem.id} title={newsItem.title} index={index} text={newsItem.text} />
+                        <TextNewsItemFeedItem
+                            id={newsItem.id}
+                            title={newsItem.title}
+                            index={index}
+                            text={newsItem.text}
+                        />
                     )}
                     {renderHR(props.data.allNewsItems.length, index)}
                 </div>
