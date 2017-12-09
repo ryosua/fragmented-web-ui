@@ -1,13 +1,20 @@
 import React from 'react'
+import isEmpty from 'lodash/isEmpty'
 
-const TextNewsItem = props => {
-    const { title, text } = props.location.state
+const renderNewsItem = params => {
+    const { title, text } = params
     return (
         <div>
             <h2>{title}</h2>
             <p>{text}</p>
         </div>
     )
+}
+
+const TextNewsItem = props => {
+    const state = props.location.state
+    const hasState = !isEmpty(state)
+    return renderNewsItem(state)
 }
 
 export default TextNewsItem
