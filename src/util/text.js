@@ -11,7 +11,8 @@ const text = {
         passwordTooShort: minimumPasswordLength =>
             `Please use a longer password. The minimum length is ${minimumPasswordLength}.`,
         invalidTitle: 'Titles cannot be blank',
-        invalidUrl: 'Links cannot be blank'
+        invalidUrl: 'Links cannot be blank',
+        invalidText: 'Text cannot be blank'
     },
     networkErrorMessages: {
         newsFeedLoad: 'There was an error getting posts. Please refresh to try again'
@@ -38,7 +39,15 @@ const text = {
         loading: 'Getting posts...'
     },
     Posting: {
-        title: 'Create a Post'
+        navigationLinkText: 'Create a Post',
+        createLinkPostTitle: 'Create a Link Post',
+        createTextPostTitle: 'Create a Text Post',
+        postTitleLabel: 'Title',
+        postTitlePlaceholder: 'Enter a title for your post',
+        urlLabel: 'Link',
+        urlPlaceholder: 'Enter a link to the page you want to share',
+        textLabel: 'Text',
+        textPlaceholder: 'Tell your story'
     },
     Submissions: {
         title: 'My posts'

@@ -27,7 +27,7 @@ const Navigation = props => (
                 )}
                 {props.isLoggedIn && (
                     <LinkContainer to="/create-post">
-                        <MenuItem>{text.Posting.title}</MenuItem>
+                        <MenuItem>{text.Posting.navigationLinkText}</MenuItem>
                     </LinkContainer>
                 )}
                 {props.isLoggedIn && (

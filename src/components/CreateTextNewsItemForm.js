@@ -9,10 +9,10 @@ const onchangeHandler = (handler, fieldName) => e => handler(e, fieldName)
 
 const fieldNames = {
     title: 'titleValue',
-    url: 'urlValue'
+    text: 'textValue'
 }
 
-const CreateLinkNewsItemForm = props => {
+const CreateTextNewsItemForm = props => {
     return (
         <div>
             <FormField
@@ -23,11 +23,11 @@ const CreateLinkNewsItemForm = props => {
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.title)}
             />
             <FormField
-                label={text.Posting.urlLabel}
+                label={text.Posting.textLabel}
                 type="text"
-                placeholder={text.Posting.urlPlaceholder}
-                value={props[fieldNames.url]}
-                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.url)}
+                placeholder={text.Posting.textPlaceholder}
+                value={props[fieldNames.text]}
+                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.text)}
             />
             <br />
             <ActionButton label="Submit" onClick={props.handleSubmitPress} />
@@ -37,9 +37,9 @@ const CreateLinkNewsItemForm = props => {
     )
 }
 
-CreateLinkNewsItemForm.propTypes = {
+CreateTextNewsItemForm.propTypes = {
     titleValue: PropTypes.string.isRequired,
-    urlValue: PropTypes.string.isRequired,
+    textValue: PropTypes.string.isRequired,
     handleTextFieldChange: PropTypes.func.isRequired,
     handleSubmitPress: PropTypes.func.isRequired,
     hasError: PropTypes.bool.isRequired,
@@ -47,4 +47,4 @@ CreateLinkNewsItemForm.propTypes = {
     errorMessage: PropTypes.string
 }
 
-export default CreateLinkNewsItemForm
+export default CreateTextNewsItemForm
