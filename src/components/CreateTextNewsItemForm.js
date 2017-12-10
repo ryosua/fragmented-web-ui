@@ -24,7 +24,7 @@ const CreateTextNewsItemForm = props => {
             />
             <FormField
                 label={text.Posting.textLabel}
-                type="text"
+                type="textarea"
                 placeholder={text.Posting.textPlaceholder}
                 value={props[fieldNames.text]}
                 onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.text)}
