@@ -7,7 +7,7 @@ const CreateLinkNewsItem = gql`
         $title: String!
         $url: String
         $text: String
-        $type: String!
+        $type: NewsItemType!
     ) {
         createNewsItem(
             userId: $userId

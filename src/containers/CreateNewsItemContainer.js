@@ -29,13 +29,7 @@ const valueToType = map(postTypeMapping, (value, key) => {
 class CreateNewsItemContainer extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            titleValue: '',
-            urlValue: '',
-            textValue: '',
-            hasError: false,
-            postTypeSelectedValue: 0
-        }
+        this.state = { titleValue: '', urlValue: '', textValue: '', hasError: false, postTypeSelectedValue: 0 }
     }
     onPostTypeSelect = value => {
         this.setState({ postTypeSelectedValue: value })
