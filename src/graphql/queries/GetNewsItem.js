@@ -9,6 +9,12 @@ const GetNewsItem = gql`
             title
             url
             type
+            comments {
+                __typename
+                id
+                creationTime
+                text
+            }
         }
     }
 `

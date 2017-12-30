@@ -3,19 +3,17 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import NewsFeedItemDetail from 'components/NewsFeedItemDetail'
 
-const TextNewsItemFeedItem = props => (
-    <div>
-        <h2>
-            <Link
-                to={{
-                    pathname: '/text-news-item',
-                    search: `?id=${props.id}`,
-                    state: props
-                }}>{`${props.index + 1}. ${props.title}`}</Link>
-        </h2>
-        <NewsFeedItemDetail id={props.id} comments={props.comments} />
-    </div>
-)
+const TextNewsItemFeedItem = props => {
+    return (
+        <div>
+            <h2>
+                <Link to={{ pathname: '/text-news-item', search: `?id=${props.id}`, state: props }}>{`${props.index +
+                    1}. ${props.title}`}</Link>
+            </h2>
+            <NewsFeedItemDetail id={props.id} comments={props.comments} pathname="/text-news-item" state={props} />
+        </div>
+    )
+}
 
 TextNewsItemFeedItem.propTypes = {
     id: PropTypes.string.isRequired,

@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
+import CommentList from 'components/CommentList'
 import text from 'util/text'
 
 const renderNewsItem = params => {
@@ -11,13 +12,14 @@ const renderNewsItem = params => {
         <div>
             <h2>{title}</h2>
             <p>{text}</p>
+            <CommentList {...params} />
         </div>
     )
 }
 
 const Loading = () => <p>{text.NewsItems.loading}</p>
 const Error = () => {
-    return <p>Error</p>
+    return <p>{text.NewsItems.error}</p>
 }
 
 const hasState = state => !isEmpty(state)
@@ -25,7 +27,6 @@ const hasState = state => !isEmpty(state)
 const TextNewsItem = props => {
     const state = props.location.state
     const isLoading = props.data && props.data.loading
-
     if (hasState(state)) {
         return renderNewsItem(state)
     } else if (isLoading) {
@@ -33,7 +34,6 @@ const TextNewsItem = props => {
     } else if (props.data && props.data.error) {
         return <Error error={props.data.error} />
     }
-
     return renderNewsItem(props.data.NewsItem)
 }
 

@@ -6,16 +6,18 @@ const NewsFeedItemDetail = props => (
     <div>
         <Link
             to={{
-                pathname: '/comments',
+                pathname: props.pathname,
                 search: `?id=${props.id}`,
-                state: props
+                state: props.state
             }}>{`${props.comments.length} comments`}</Link>
     </div>
 )
 
 NewsFeedItemDetail.propTypes = {
     id: PropTypes.string.isRequired,
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
+    pathname: PropTypes.string.isRequired,
+    state: PropTypes.object
 }
 
 export default NewsFeedItemDetail

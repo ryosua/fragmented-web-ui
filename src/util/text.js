@@ -39,7 +39,12 @@ const text = {
         loading: 'Getting posts...'
     },
     NewsItems: {
-        loading: 'Loading news item...'
+        loading: 'Loading news item...',
+        error: 'Error'
+    },
+    CommentList: {
+        loading: 'Loading comments...',
+        error: 'Error'
     },
     Posting: {
         navigationLinkText: 'Create a Post',
