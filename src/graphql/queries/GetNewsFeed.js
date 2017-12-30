@@ -6,6 +6,7 @@ const GetNewsFeed = gql`
             __typename
             id
             title
+            text
             comments {
                 __typename
                 id
