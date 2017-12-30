@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
+import text from 'util/text'
 
 const renderNewsItem = params => {
     const { title, text } = params
@@ -14,7 +15,7 @@ const renderNewsItem = params => {
     )
 }
 
-const Loading = () => <p>Loading news item...</p>
+const Loading = () => <p>{text.NewsFeed.loading}</p>
 const Error = () => {
     return <p>Error</p>
 }

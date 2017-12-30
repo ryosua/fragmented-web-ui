@@ -16,7 +16,7 @@ const renderHR = (listLength, index) => {
 
 const NewsFeedContainer = props => {
     if (props.loading) {
-        return <p>{text.NewsFeed.loading}</p>
+        return <p>{text.NewsItems.loading}</p>
     }
 
     if (props.error) {

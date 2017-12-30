@@ -38,6 +38,9 @@ const text = {
     NewsFeed: {
         loading: 'Getting posts...'
     },
+    NewsItems: {
+        loading: 'Loading news item...'
+    },
     Posting: {
         navigationLinkText: 'Create a Post',
         createLinkPostTitle: 'Create a Link Post',
