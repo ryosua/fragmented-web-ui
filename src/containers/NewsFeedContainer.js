@@ -28,13 +28,20 @@ const NewsFeedContainer = props => {
             {map(props.allNewsItems, (newsItem, index) => (
                 <div key={newsItem.id}>
                     {newsItem.type === 'LINK' ? (
-                        <LinkNewsItem id={newsItem.id} title={newsItem.title} index={index} url={newsItem.url} />
+                        <LinkNewsItem
+                            id={newsItem.id}
+                            title={newsItem.title}
+                            index={index}
+                            url={newsItem.url}
+                            comments={newsItem.comments}
+                        />
                     ) : (
                         <TextNewsItemFeedItem
                             id={newsItem.id}
                             title={newsItem.title}
                             index={index}
                             text={newsItem.text}
+                            comments={newsItem.comments}
                         />
                     )}
                     {renderHR(props.allNewsItems.length, index)}

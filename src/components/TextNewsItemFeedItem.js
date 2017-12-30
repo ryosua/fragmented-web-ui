@@ -18,6 +18,7 @@ TextNewsItemFeedItem.propTypes = {
     title: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired
 }
 
 export default TextNewsItemFeedItem
