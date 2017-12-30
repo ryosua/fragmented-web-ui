@@ -15,7 +15,7 @@ const renderNewsItem = params => {
     )
 }
 
-const Loading = () => <p>{text.NewsFeed.loading}</p>
+const Loading = () => <p>{text.NewsItems.loading}</p>
 const Error = () => {
     return <p>Error</p>
 }
