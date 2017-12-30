@@ -3,8 +3,10 @@ import map from 'lodash/map'
 import { graphql } from 'react-apollo'
 import LinkNewsItem from 'components/LinkNewsItem'
 import TextNewsItemFeedItem from 'components/TextNewsItemFeedItem'
+import ActionButton from 'components/ActionButton'
 import GetNewsFeed from 'graphql/queries/GetNewsFeed'
 import text from 'util/text'
+import last from 'lodash/last'
 
 const renderHR = (listLength, index) => {
     if (index !== listLength - 1) {
@@ -13,17 +15,17 @@ const renderHR = (listLength, index) => {
 }
 
 const NewsFeedContainer = props => {
-    if (props.data && props.data.loading) {
+    if (props.loading) {
         return <p>{text.NewsFeed.loading}</p>
     }
 
-    if (props.data && props.data.error) {
+    if (props.error) {
         return <p> {text.networkErrorMessages.newsFeedLoad}</p>
     }
 
     return (
         <div>
-            {map(props.data.allNewsItems, (newsItem, index) => (
+            {map(props.allNewsItems, (newsItem, index) => (
                 <div key={newsItem.id}>
                     {newsItem.type === 'LINK' ? (
                         <LinkNewsItem id={newsItem.id} title={newsItem.title} index={index} url={newsItem.url} />
@@ -35,11 +37,35 @@ const NewsFeedContainer = props => {
                             text={newsItem.text}
                         />
                     )}
-                    {renderHR(props.data.allNewsItems.length, index)}
+                    {renderHR(props.allNewsItems.length, index)}
                 </div>
             ))}
+            <ActionButton label="Load more" onClick={props.loadMoreEntries} />
         </div>
     )
 }
 
-export default graphql(GetNewsFeed)(NewsFeedContainer)
+export default graphql(GetNewsFeed, {
+    props({ data: { allNewsItems, loading, error, fetchMore } }) {
+        return {
+            allNewsItems,
+            loading,
+            error,
+            loadMoreEntries() {
+                return fetchMore({
+                    variables: {
+                        after: last(allNewsItems).id
+                    },
+                    updateQuery: (previousResult, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) {
+                            return previousResult
+                        }
+                        return Object.assign({}, previousResult, {
+                            allNewsItems: [...previousResult.allNewsItems, ...fetchMoreResult.allNewsItems]
+                        })
+                    }
+                })
+            }
+        }
+    }
+})(NewsFeedContainer)

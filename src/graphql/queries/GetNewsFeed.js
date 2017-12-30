@@ -1,14 +1,10 @@
 import gql from 'graphql-tag'
 
 const GetNewsFeed = gql`
-    query GetNewsFeedQuery {
-        allNewsItems(orderBy: creationTime_DESC) {
-            __typename
+    query GetNewsFeedQuery($after: String) {
+        allNewsItems(orderBy: creationTime_DESC, first: 12, after: $after) {
             id
-            text
             title
-            url
-            type
         }
     }
 `
