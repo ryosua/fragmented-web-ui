@@ -5,8 +5,10 @@ const GetNewsFeed = gql`
         allNewsItems(orderBy: creationTime_DESC, first: 12, after: $after) {
             __typename
             id
+            type
             title
             text
+            url
             comments {
                 __typename
                 id
