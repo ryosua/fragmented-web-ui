@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import NewsFeedItemDetail from 'components/NewsFeedItemDetail'
 
 const LinkNewsItem = props => (
-    <h2>
-        <a href={props.url}>{`${props.index + 1}. ${props.title}`}</a>
-    </h2>
+    <div>
+        <h2>
+            <a href={props.url}>{`${props.index + 1}. ${props.title}`}</a>
+        </h2>
+        <NewsFeedItemDetail id={props.id} comments={props.comments} />
+    </div>
 )
 
 LinkNewsItem.propTypes = {
