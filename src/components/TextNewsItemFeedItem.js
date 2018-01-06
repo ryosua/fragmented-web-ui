@@ -10,7 +10,13 @@ const TextNewsItemFeedItem = props => {
                 <Link to={{ pathname: '/news-item-detail', search: `?id=${props.id}`, state: props }}>{`${props.index +
                     1}. ${props.title}`}</Link>
             </h2>
-            <NewsFeedItemDetail id={props.id} comments={props.comments} pathname="/news-item-detail" state={props} />
+            <NewsFeedItemDetail
+                id={props.id}
+                comments={props.comments}
+                user={props.user}
+                pathname="/news-item-detail"
+                state={props}
+            />
         </div>
     )
 }
@@ -20,7 +26,8 @@ TextNewsItemFeedItem.propTypes = {
     title: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired
 }
 
 export default TextNewsItemFeedItem

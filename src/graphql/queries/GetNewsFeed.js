@@ -9,9 +9,19 @@ const GetNewsFeed = gql`
             title
             text
             url
+            user {
+                __typename
+                id
+                username
+            }
             comments {
                 __typename
                 id
+                user {
+                    __typename
+                    id
+                    username
+                }
                 creationTime
                 text
             }

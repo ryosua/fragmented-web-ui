@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 const NewsFeedItemDetail = props => (
     <div>
+        <p>{`Submitted by ${props.user.username}`}</p>
         <Link
             to={{
                 pathname: props.pathname,
@@ -16,6 +17,7 @@ const NewsFeedItemDetail = props => (
 NewsFeedItemDetail.propTypes = {
     id: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
     state: PropTypes.object
 }

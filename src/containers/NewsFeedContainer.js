@@ -35,6 +35,7 @@ const NewsFeedContainer = props => {
                             url={newsItem.url}
                             comments={newsItem.comments}
                             type={newsItem.type}
+                            user={newsItem.user}
                         />
                     ) : (
                         <TextNewsItemFeedItem
@@ -44,6 +45,7 @@ const NewsFeedContainer = props => {
                             text={newsItem.text}
                             comments={newsItem.comments}
                             type={newsItem.type}
+                            user={newsItem.user}
                         />
                     )}
                     {renderHR(props.allNewsItems.length, index)}
