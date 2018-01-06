@@ -59,6 +59,10 @@ const text = {
     },
     Submissions: {
         title: 'My posts'
+    },
+    Comments: {
+        commentsHeader: 'Comments',
+        noCommentsHeader: 'There are no comments yet. Be the first!'
     }
 }
 
