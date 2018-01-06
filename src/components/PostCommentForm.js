@@ -14,13 +14,14 @@ const PostCommentForm = props => (
             onChange={props.onChange}
         />
         <br />
-        <ActionButton label={text.Comments.formButtonLabel} onClick={() => {}} />
+        <ActionButton label={text.Comments.formButtonLabel} onClick={props.onSubmit} />
     </div>
 )
 
 PostCommentForm.propTypes = {
     comment: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
 }
 
 export default PostCommentForm
