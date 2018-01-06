@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import text from 'util/text'
 
@@ -16,6 +17,10 @@ const CommentList = props => {
             ))}
         </div>
     )
+}
+
+CommentList.propTypes = {
+    comments: PropTypes.array.isRequired
 }
 
 export default CommentList
