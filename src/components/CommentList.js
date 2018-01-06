@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import text from 'util/text'
+import PostCommentFormContainer from 'containers/PostCommentFormContainer'
 
 const CommentList = props => {
     const { comments } = props
@@ -9,6 +10,7 @@ const CommentList = props => {
     return (
         <div>
             <h3>{comments.length > 0 ? commentsHeader : noCommentsHeader}</h3>
+            <PostCommentFormContainer />
             {map(comments, (comment, index) => (
                 <div key={comment.id}>
                     <p>{`${comment.user.username}:`}</p>

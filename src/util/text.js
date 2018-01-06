@@ -63,7 +63,9 @@ const text = {
     Comments: {
         comments: numberOfComments => (numberOfComments === 1 ? 'comment' : 'comments'),
         commentsHeader: 'Comments:',
-        noCommentsHeader: 'There are no comments yet. Be the first!'
+        noCommentsHeader: 'There are no comments yet. Be the first!',
+        formPlaceholder: 'Post a comment',
+        formButtonLabel: 'Post Comment'
     }
 }
 

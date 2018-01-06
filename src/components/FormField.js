@@ -6,7 +6,7 @@ const FormField = props => {
     const componentClass = props.type === 'textarea' ? 'textarea' : undefined
     return (
         <div>
-            <ControlLabel>{props.label}</ControlLabel>
+            {props.label && <ControlLabel>{props.label}</ControlLabel>}
             <FormControl
                 type={props.type}
                 componentClass={componentClass}
@@ -19,7 +19,7 @@ const FormField = props => {
 }
 
 FormField.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
