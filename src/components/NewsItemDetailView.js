@@ -3,15 +3,22 @@ import isEmpty from 'lodash/isEmpty'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
+import NewsItemType from 'graphql/enums/NewsItemType'
 import CommentList from 'components/CommentList'
 import text from 'util/text'
 
-const renderTextNewsItem = params => {
-    const { title, text } = params
+const renderNewsItem = params => {
+    const { title, text, url, type } = params
+    const TextNewsItemTitle = () => <h2>{title}</h2>
+    const LinkNewsItemTitle = () => (
+        <h2>
+            <a href={url}>{title}</a>
+        </h2>
+    )
     return (
         <div>
-            <h2>{title}</h2>
-            <p>{text}</p>
+            {type === NewsItemType.TEXT ? <TextNewsItemTitle /> : <LinkNewsItemTitle />}
+            {type === NewsItemType.TEXT && <p>{text}</p>}
             <CommentList {...params} />
         </div>
     )
@@ -28,13 +35,13 @@ const NewsItemDetailView = props => {
     const state = props.location.state
     const isLoading = props.data && props.data.loading
     if (hasState(state)) {
-        return renderTextNewsItem(state)
+        return renderNewsItem(state)
     } else if (isLoading) {
         return <Loading />
     } else if (props.data && props.data.error) {
         return <Error error={props.data.error} />
     }
-    return renderTextNewsItem(props.data.NewsItem)
+    return renderNewsItem(props.data.NewsItem)
 }
 
 export default graphql(GetNewsItem, {

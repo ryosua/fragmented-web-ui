@@ -7,10 +7,10 @@ const TextNewsItemFeedItem = props => {
     return (
         <div>
             <h2>
-                <Link to={{ pathname: '/text-news-item', search: `?id=${props.id}`, state: props }}>{`${props.index +
+                <Link to={{ pathname: '/news-item-detail', search: `?id=${props.id}`, state: props }}>{`${props.index +
                     1}. ${props.title}`}</Link>
             </h2>
-            <NewsFeedItemDetail id={props.id} comments={props.comments} pathname="/text-news-item" state={props} />
+            <NewsFeedItemDetail id={props.id} comments={props.comments} pathname="/news-item-detail" state={props} />
         </div>
     )
 }

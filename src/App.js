@@ -56,7 +56,7 @@ class App extends Component {
                                 />
                             )}
                         />
-                        <Route path="/text-news-item" component={NewsItemDetailView} />
+                        <Route path="/news-item-detail" component={NewsItemDetailView} />
                         <Route path="/submissions" component={Submissions} />
                         <Route path="/logout" render={() => <Logout onLogout={this.onLogout} />} />
                     </div>
