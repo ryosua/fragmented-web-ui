@@ -6,7 +6,7 @@ import GetNewsItem from 'graphql/queries/GetNewsItem'
 import CommentList from 'components/CommentList'
 import text from 'util/text'
 
-const renderNewsItem = params => {
+const renderTextNewsItem = params => {
     const { title, text } = params
     return (
         <div>
@@ -24,20 +24,20 @@ const Error = () => {
 
 const hasState = state => !isEmpty(state)
 
-const TextNewsItem = props => {
+const NewsItemDetailView = props => {
     const state = props.location.state
     const isLoading = props.data && props.data.loading
     if (hasState(state)) {
-        return renderNewsItem(state)
+        return renderTextNewsItem(state)
     } else if (isLoading) {
         return <Loading />
     } else if (props.data && props.data.error) {
         return <Error error={props.data.error} />
     }
-    return renderNewsItem(props.data.NewsItem)
+    return renderTextNewsItem(props.data.NewsItem)
 }
 
 export default graphql(GetNewsItem, {
     options: ({ location }) => ({ variables: { id: queryString.parse(location.search).id } }),
     skip: ownProps => hasState(ownProps.location.state)
-})(TextNewsItem)
+})(NewsItemDetailView)

@@ -10,7 +10,7 @@ import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
 import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
 import Logout from 'components/Logout'
-import TextNewsItem from 'components/TextNewsItem'
+import NewsItemDetailView from 'components/NewsItemDetailView'
 
 class App extends Component {
     constructor(props) {
@@ -56,7 +56,7 @@ class App extends Component {
                                 />
                             )}
                         />
-                        <Route path="/text-news-item" component={TextNewsItem} />
+                        <Route path="/text-news-item" component={NewsItemDetailView} />
                         <Route path="/submissions" component={Submissions} />
                         <Route path="/logout" render={() => <Logout onLogout={this.onLogout} />} />
                     </div>
