@@ -61,7 +61,8 @@ const text = {
         title: 'My posts'
     },
     Comments: {
-        commentsHeader: 'Comments',
+        comments: numberOfComments => (numberOfComments === 1 ? 'comment' : 'comments'),
+        commentsHeader: 'Comments:',
         noCommentsHeader: 'There are no comments yet. Be the first!'
     }
 }
