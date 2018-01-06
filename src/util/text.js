@@ -65,7 +65,8 @@ const text = {
         commentsHeader: 'Comments:',
         noCommentsHeader: 'There are no comments yet. Be the first!',
         formPlaceholder: 'Post a comment',
-        formButtonLabel: 'Post Comment'
+        formButtonLabel: 'Post Comment',
+        unauthenticatedMessage: 'Please login to post a comment.'
     }
 }
 
