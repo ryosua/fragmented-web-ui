@@ -11,6 +11,7 @@ const CommentList = props => {
             <h3>{comments.length > 0 ? commentsHeader : noCommentsHeader}</h3>
             {map(comments, (comment, index) => (
                 <div key={comment.id}>
+                    <p>{`${comment.user.username}:`}</p>
                     <p>{comment.text}</p>
                     {index !== comments.length - 1 && <hr />}
                 </div>
