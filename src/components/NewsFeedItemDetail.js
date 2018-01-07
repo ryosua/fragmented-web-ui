@@ -11,8 +11,7 @@ const NewsFeedItemDetail = props => {
             <Link
                 to={{
                     pathname: props.pathname,
-                    search: `?id=${props.id}`,
-                    state: props.state
+                    search: `?id=${props.id}`
                 }}>{`${numberOfComments} ${text.Comments.comments(numberOfComments)}`}</Link>
         </div>
     )

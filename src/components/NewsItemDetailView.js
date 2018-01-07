@@ -31,20 +31,12 @@ const Error = () => {
     return <p>{text.NewsItems.error}</p>
 }
 
-const hasState = props => {
-    const state = get(props, 'location.state', {})
-    !isEmpty(state)
-}
-
 const NewsItemDetailView = props => {
-    const state = props.location.state
     const isLoading = props.data && props.data.loading
-    if (hasState(state)) {
-        return renderNewsItem(state, props.userId)
-    } else if (isLoading) {
+    if (isLoading) {
         return <Loading />
     } else if (props.data && props.data.error) {
-        return <Error error={props.data.error} />
+        return props.data ? <Error error={props.data.error} /> : <Error />
     }
     return renderNewsItem(props.data.NewsItem, props.userId)
 }
@@ -54,6 +46,5 @@ NewsItemDetailView.propTypes = {
 }
 
 export default graphql(GetNewsItem, {
-    options: ({ location }) => ({ variables: { id: queryString.parse(location.search).id } }),
-    skip: ownProps => hasState(ownProps)
+    options: ({ location }) => ({ variables: { id: queryString.parse(location.search).id } })
 })(NewsItemDetailView)

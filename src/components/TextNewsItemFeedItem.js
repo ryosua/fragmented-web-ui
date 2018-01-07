@@ -15,7 +15,6 @@ const TextNewsItemFeedItem = props => {
                 comments={props.comments}
                 user={props.user}
                 pathname="/news-item-detail"
-                state={props}
             />
         </div>
     )
