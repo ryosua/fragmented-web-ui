@@ -10,7 +10,7 @@ import CommentList from 'components/CommentList'
 import text from 'util/text'
 
 const renderNewsItem = (params, userId) => {
-    const { title, text, url, type } = params
+    const { id, title, text, url, type } = params
     const TextNewsItemTitle = () => <h2>{title}</h2>
     const LinkNewsItemTitle = () => (
         <h2>
@@ -21,7 +21,7 @@ const renderNewsItem = (params, userId) => {
         <div>
             {type === NewsItemType.TEXT ? <TextNewsItemTitle /> : <LinkNewsItemTitle />}
             {type === NewsItemType.TEXT && <p>{text}</p>}
-            <CommentList {...params} userId={userId} />
+            <CommentList {...params} newsItemId={id} userId={userId} />
         </div>
     )
 }
