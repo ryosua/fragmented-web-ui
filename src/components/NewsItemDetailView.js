@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
-import get from 'lodash/get'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
