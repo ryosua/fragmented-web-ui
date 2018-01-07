@@ -115,7 +115,7 @@ class CreateNewsItemContainer extends React.Component {
 }
 
 CreateNewsItemContainer.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
+    isLoggedIn: PropTypes.bool,
     userId: PropTypes.string
 }
 

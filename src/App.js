@@ -49,7 +49,12 @@ class App extends Component {
                         />
                         <Route
                             path="/create-post"
-                            render={() => <CreateNewsItemContainer userId={this.state.userId} />}
+                            render={() => (
+                                <CreateNewsItemContainer
+                                    userId={this.state.userId}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                />
+                            )}
                         />
                         <Route
                             path="/news-item-detail"
