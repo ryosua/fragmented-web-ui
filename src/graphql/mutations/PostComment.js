@@ -5,6 +5,13 @@ const PostComment = gql`
         createComment(creationTime: $creationTime, text: $text, newsItemId: $newsItemId, userId: $userId) {
             __typename
             id
+            user {
+                __typename
+                id
+                username
+            }
+            creationTime
+            text
         }
     }
 `

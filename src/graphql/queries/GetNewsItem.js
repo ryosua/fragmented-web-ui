@@ -12,6 +12,11 @@ const GetNewsItem = gql`
             comments {
                 __typename
                 id
+                user {
+                    __typename
+                    id
+                    username
+                }
                 creationTime
                 text
             }
