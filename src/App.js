@@ -49,14 +49,18 @@ class App extends Component {
                         />
                         <Route
                             path="/create-post"
-                            render={() => (
-                                <CreateNewsItemContainer
+                            render={() => <CreateNewsItemContainer userId={this.state.userId} />}
+                        />
+                        <Route
+                            path="/news-item-detail"
+                            render={props => (
+                                <NewsItemDetailView
+                                    {...props}
                                     isLoggedIn={this.state.isLoggedIn}
                                     userId={this.state.userId}
                                 />
                             )}
                         />
-                        <Route path="/news-item-detail" component={NewsItemDetailView} />
                         <Route path="/submissions" component={Submissions} />
                         <Route path="/logout" render={() => <Logout onLogout={this.onLogout} />} />
                     </div>
