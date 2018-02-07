@@ -8,6 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloLink, concat } from 'apollo-link'
+import { Web3Provider } from 'react-web3'
 
 const httpLink = new HttpLink({ uri: 'https://api.graph.cool/simple/v1/Fragmented' })
 
@@ -27,9 +28,11 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <App />
-    </ApolloProvider>,
+    <Web3Provider passive>
+        <ApolloProvider client={client}>
+            <App />
+        </ApolloProvider>
+    </Web3Provider>,
     document.getElementById('root')
 )
 registerServiceWorker()
