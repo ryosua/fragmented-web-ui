@@ -7,7 +7,7 @@ const NewsFeedItemDetail = props => {
     const numberOfComments = props.comments.length
     return (
         <div>
-            <p>{`Submitted by ${props.user.username}`}</p>
+            <p>{`${text.NewsItems.usernamePrefix} ${props.user.username}`}</p>
             <Link
                 to={{
                     pathname: props.pathname,

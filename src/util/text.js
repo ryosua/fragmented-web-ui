@@ -40,7 +40,8 @@ const text = {
     },
     NewsItems: {
         loading: 'Loading news item...',
-        error: 'Error'
+        error: 'Error',
+        usernamePrefix: 'Submitted by'
     },
     CommentList: {
         loading: 'Loading comments...',
