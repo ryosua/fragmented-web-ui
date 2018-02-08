@@ -13,6 +13,7 @@ const GetNewsFeed = gql`
                 __typename
                 id
                 username
+                publicAddress
             }
             comments {
                 __typename
@@ -21,6 +22,7 @@ const GetNewsFeed = gql`
                     __typename
                     id
                     username
+                    publicAddress
                 }
                 creationTime
                 text

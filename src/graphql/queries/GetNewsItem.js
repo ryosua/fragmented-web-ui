@@ -16,6 +16,7 @@ const GetNewsItem = gql`
                     __typename
                     id
                     username
+                    publicAddress
                 }
                 creationTime
                 text
