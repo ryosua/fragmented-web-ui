@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import get from 'lodash/get'
 import text from 'util/text'
 import tippable from 'util/tippable'
 
-const eth = window.web3.eth
+const eth = get(window, 'web3.eth', undefined)
 const amount = 1292607577265618
 
 const tip = user =>
