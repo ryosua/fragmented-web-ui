@@ -36,7 +36,11 @@ const NewsFeedItemDetail = (props, context) => {
         <div>
             <p>
                 {`${text.NewsItems.usernamePrefix} ${user.username}  `}
-                {tippable(web3Context, user) && <a onClick={() => tip(user)}>(tip)</a>}
+                {tippable(web3Context, user) && (
+                    <a id="tipButton" onClick={() => tip(user)}>
+                        (tip)
+                    </a>
+                )}
             </p>
             <Link to={{ pathname: pathname, search: `?id=${id}` }}>{`${numberOfComments} ${text.Comments.comments(
                 numberOfComments
