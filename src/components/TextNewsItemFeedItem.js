@@ -15,6 +15,7 @@ const TextNewsItemFeedItem = props => {
                 comments={props.comments}
                 user={props.user}
                 pathname="/news-item-detail"
+                ethToUsdRate={props.ethToUsdRate}
             />
         </div>
     )
@@ -26,7 +27,8 @@ TextNewsItemFeedItem.propTypes = {
     index: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    ethToUsdRate: PropTypes.number
 }
 
 export default TextNewsItemFeedItem

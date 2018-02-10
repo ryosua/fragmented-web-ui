@@ -37,7 +37,7 @@ class NewsFeedItemDetail extends React.Component {
 
     render() {
         const web3Context = this.context.web3
-        const { user, pathname, id, comments } = this.props
+        const { user, pathname, id, comments, ethToUsdRate } = this.props
         const numberOfComments = comments.length
         return (
             <div>
@@ -46,6 +46,7 @@ class NewsFeedItemDetail extends React.Component {
                     show={this.state.showTipModel}
                     onClose={this.handleCloseTipModal}
                     onTip={() => tip(user)}
+                    ethToUsdRate={ethToUsdRate}
                 />
                 <p>
                     {`${text.NewsItems.usernamePrefix} ${user.username}  `}
@@ -68,7 +69,8 @@ NewsFeedItemDetail.propTypes = {
     comments: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
-    state: PropTypes.object
+    state: PropTypes.object,
+    ethToUsdRate: PropTypes.number
 }
 
 NewsFeedItemDetail.contextTypes = {

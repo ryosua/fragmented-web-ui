@@ -13,6 +13,7 @@ const LinkNewsItem = props => (
             user={props.user}
             pathname="/news-item-detail"
             state={props}
+            ethToUsdRate={props.ethToUsdRate}
         />
     </div>
 )
@@ -23,7 +24,8 @@ LinkNewsItem.propTypes = {
     index: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    ethToUsdRate: PropTypes.number
 }
 
 export default LinkNewsItem

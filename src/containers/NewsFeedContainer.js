@@ -8,52 +8,68 @@ import GetNewsFeed from 'graphql/queries/GetNewsFeed'
 import text from 'util/text'
 import last from 'lodash/last'
 
+import getConversionRate from 'util/getConversionRate'
+
 const renderHR = (listLength, index) => {
     if (index !== listLength - 1) {
         return <hr />
     }
 }
 
-const NewsFeedContainer = props => {
-    if (props.loading) {
-        return <p>{text.NewsItems.loading}</p>
+class NewsFeedContainer extends React.Component {
+    componentDidMount() {
+        getConversionRate()
+            .then(rate => {
+                this.setState({ ethToUsdRate: rate })
+            })
+            .catch(error => {
+                console.log('error getting conversion rate')
+            })
     }
 
-    if (props.error) {
-        return <p> {text.networkErrorMessages.newsFeedLoad}</p>
-    }
+    render() {
+        if (this.props.loading) {
+            return <p>{text.NewsItems.loading}</p>
+        }
 
-    return (
-        <div>
-            {map(props.allNewsItems, (newsItem, index) => (
-                <div key={newsItem.id}>
-                    {newsItem.type === 'LINK' ? (
-                        <LinkNewsItem
-                            id={newsItem.id}
-                            title={newsItem.title}
-                            index={index}
-                            url={newsItem.url}
-                            comments={newsItem.comments}
-                            type={newsItem.type}
-                            user={newsItem.user}
-                        />
-                    ) : (
-                        <TextNewsItemFeedItem
-                            id={newsItem.id}
-                            title={newsItem.title}
-                            index={index}
-                            text={newsItem.text}
-                            comments={newsItem.comments}
-                            type={newsItem.type}
-                            user={newsItem.user}
-                        />
-                    )}
-                    {renderHR(props.allNewsItems.length, index)}
-                </div>
-            ))}
-            <ActionButton label="Load more" onClick={props.loadMoreEntries} />
-        </div>
-    )
+        if (this.props.error) {
+            return <p> {text.networkErrorMessages.newsFeedLoad}</p>
+        }
+
+        return (
+            <div>
+                {map(this.props.allNewsItems, (newsItem, index) => (
+                    <div key={newsItem.id}>
+                        {newsItem.type === 'LINK' ? (
+                            <LinkNewsItem
+                                id={newsItem.id}
+                                title={newsItem.title}
+                                index={index}
+                                url={newsItem.url}
+                                comments={newsItem.comments}
+                                type={newsItem.type}
+                                user={newsItem.user}
+                                ethToUsdRate={this.state.ethToUsdRate}
+                            />
+                        ) : (
+                            <TextNewsItemFeedItem
+                                id={newsItem.id}
+                                title={newsItem.title}
+                                index={index}
+                                text={newsItem.text}
+                                comments={newsItem.comments}
+                                type={newsItem.type}
+                                user={newsItem.user}
+                                ethToUsdRate={this.state.ethToUsdRate}
+                            />
+                        )}
+                        {renderHR(this.props.allNewsItems.length, index)}
+                    </div>
+                ))}
+                <ActionButton label="Load more" onClick={this.props.loadMoreEntries} />
+            </div>
+        )
+    }
 }
 
 export default graphql(GetNewsFeed, {

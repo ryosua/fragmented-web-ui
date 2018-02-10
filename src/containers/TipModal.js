@@ -3,28 +3,30 @@ import PropTypes from 'prop-types'
 import { Modal, Button } from 'react-bootstrap'
 import text from 'util/text'
 import FormField from 'components/FormField'
-import getConversionRate from 'util/getConversionRate'
 
 const { tipBody, ethAmount, usdAmount } = text.Tipping
+const defaultTipAmountInUsd = 1
 
 class TipModal extends React.Component {
     state = {
-        ethAmount: 0,
-        usdAmount: 0
+        ethAmount: this.props.ethToUsdRate ? defaultTipAmountInUsd * this.props.ethToUsdRate : 0,
+        usdAmount: this.props.ethToUsdRate ? defaultTipAmountInUsd : 0
     }
 
-    componentDidMount() {
-        getConversionRate()
-            .then(response => {
-                console.log(JSON.stringify(response.data.rates.ETH))
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    handleEthAmountChange = e => {
+        const value = e.target.value
+        const usdValue = this.props.ethToUsdRate ? value / this.props.ethToUsdRate : undefined
+        this.setState({ ethAmount: value, usdAmount: usdValue })
+    }
+
+    handleUsdAmountChange = e => {
+        const value = e.target.value
+        const ethValue = value * this.props.ethToUsdRate
+        this.setState({ ethAmount: ethValue, usdAmount: value })
     }
 
     render() {
-        const { user, show, onClose, onTip } = this.props
+        const { user, show, onClose, onTip, ethToUsdRate } = this.props
         return (
             <Modal show={show} onHide={onClose}>
                 <div className="tipModal">
@@ -37,18 +39,21 @@ class TipModal extends React.Component {
                         type="number"
                         placeholder=""
                         value={this.state.ethAmount + ''}
-                        onChange={() => {}}
+                        onChange={this.handleEthAmountChange}
                     />
-                    <FormField
-                        label={usdAmount}
-                        type="number"
-                        placeholder=""
-                        value={this.state.usdAmount + ''}
-                        onChange={() => {}}
-                    />
+                    {ethToUsdRate && (
+                        <FormField
+                            label={usdAmount}
+                            type="number"
+                            placeholder=""
+                            value={this.state.usdAmount + ''}
+                            onChange={this.handleUsdAmountChange}
+                        />
+                    )}
+
                     <Modal.Footer>
                         <Button onClick={onClose}>Close</Button>
-                        <Button onClick={onTip} bsStyle="primary">
+                        <Button onClick={onTip} bsStyle="primary" disabled={!this.state.ethAmount}>
                             Tip
                         </Button>
                     </Modal.Footer>
@@ -62,7 +67,8 @@ TipModal.propTypes = {
     user: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onTip: PropTypes.func.isRequired
+    onTip: PropTypes.func.isRequired,
+    ethToUsdRate: PropTypes.number
 }
 
 export default TipModal
