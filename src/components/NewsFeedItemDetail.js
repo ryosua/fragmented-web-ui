@@ -29,9 +29,6 @@ const tip = user =>
 const NewsFeedItemDetail = (props, context) => {
     const web3Context = context.web3
     const { user, pathname, id, comments } = props
-
-    console.log(JSON.stringify(web3Context))
-    console.log(JSON.stringify(user))
     const numberOfComments = comments.length
     return (
         <div>
