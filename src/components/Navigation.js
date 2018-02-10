@@ -12,6 +12,7 @@ const Navigation = props => (
             </Navbar.Brand>
         </Navbar.Header>
         <Nav>
+            {props.isLoggedIn && <NavItem href="/create-post">{text.Posting.navigationLinkText}</NavItem>}
             <NavItem href="http://www.ryanyosua.me/decentralized-social-network/">{text.app.aboutLinkText}</NavItem>
             <NavItem href="http://www.ryanyosua.me/">{text.app.blogLinkText}</NavItem>
             <NavDropdown title="Account" id="basic-nav-dropdown">
@@ -23,11 +24,6 @@ const Navigation = props => (
                 {!props.isLoggedIn && (
                     <LinkContainer to="/login">
                         <MenuItem>{text.Login.title}</MenuItem>
-                    </LinkContainer>
-                )}
-                {props.isLoggedIn && (
-                    <LinkContainer to="/create-post">
-                        <MenuItem>{text.Posting.navigationLinkText}</MenuItem>
                     </LinkContainer>
                 )}
                 {props.isLoggedIn && (
