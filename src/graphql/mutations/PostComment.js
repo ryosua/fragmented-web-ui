@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import UserFragment from '../fragments/UserFragment'
 
 const PostComment = gql`
     mutation PostComment($creationTime: DateTime!, $text: String!, $newsItemId: ID, $userId: ID) {
@@ -6,13 +7,12 @@ const PostComment = gql`
             __typename
             id
             user {
-                __typename
-                id
-                username
+                ...UserFragment
             }
             creationTime
             text
         }
     }
+    ${UserFragment}
 `
 export default PostComment

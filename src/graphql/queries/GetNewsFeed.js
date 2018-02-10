@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import UserFragment from '../fragments/UserFragment'
 
 const GetNewsFeed = gql`
     query GetNewsFeedQuery($after: String) {
@@ -10,24 +11,19 @@ const GetNewsFeed = gql`
             text
             url
             user {
-                __typename
-                id
-                username
-                publicAddress
+                ...UserFragment
             }
             comments {
                 __typename
                 id
                 user {
-                    __typename
-                    id
-                    username
-                    publicAddress
+                    ...UserFragment
                 }
                 creationTime
                 text
             }
         }
     }
+    ${UserFragment}
 `
 export default GetNewsFeed

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import UserFragment from '../fragments/UserFragment'
 
 const GetNewsItem = gql`
     query GetNewsItemQuery($id: ID!) {
@@ -13,15 +14,13 @@ const GetNewsItem = gql`
                 __typename
                 id
                 user {
-                    __typename
-                    id
-                    username
-                    publicAddress
+                    ...UserFragment
                 }
                 creationTime
                 text
             }
         }
     }
+    ${UserFragment}
 `
 export default GetNewsItem
