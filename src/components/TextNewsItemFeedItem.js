@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import NewsFeedItemDetail from 'components/NewsFeedItemDetail'
+import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
 
 const TextNewsItemFeedItem = props => {
     return (

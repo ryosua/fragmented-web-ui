@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NewsFeedItemDetail from 'components/NewsFeedItemDetail'
+import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
 
 const LinkNewsItem = props => (
     <div>

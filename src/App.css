@@ -16,3 +16,7 @@
 #tipButton {
     cursor: pointer;
 }
+
+.tipModal {
+    padding: 20px;
+}

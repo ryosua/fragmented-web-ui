@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ControlLabel, FormControl } from 'react-bootstrap'
 
 const FormField = props => {
-    const componentClass = props.type === 'textarea' ? 'textarea' : undefined
+    const componentClass = props.type === 'textarea' ? 'textarea' : 'input'
     return (
         <div>
             {props.label && <ControlLabel>{props.label}</ControlLabel>}

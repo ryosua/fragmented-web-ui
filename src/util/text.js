@@ -58,6 +58,11 @@ const text = {
         textLabel: 'Text',
         textPlaceholder: 'Tell your story'
     },
+    Tipping: {
+        tipBody: username => `Give ${username} a tip to show that you liked his post.`,
+        ethAmount: 'Amount(Eth)',
+        usdAmount: 'Amount(USD)'
+    },
     Submissions: {
         title: 'My posts'
     },
