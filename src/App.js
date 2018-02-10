@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
 import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
+import { graphql } from 'react-apollo'
 import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
 import Navigation from 'components/Navigation'
@@ -11,6 +13,7 @@ import Submissions from 'components/Submissions'
 import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
 import Logout from 'components/Logout'
 import NewsItemDetailView from 'components/NewsItemDetailView'
+import UpdateUserPublicAddress from 'graphql/mutations/UpdateUserPublicAddress'
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +22,21 @@ class App extends Component {
         const userId = localStorage.getItem('userId')
         const isLoggedIn = !isEmpty(token) && !isEmpty(userId)
         this.state = { isLoggedIn: isLoggedIn, userId: isLoggedIn ? userId : undefined }
+    }
+
+    componentDidMount() {
+        const coinbase = get(window, 'web3.eth.coinbase', undefined)
+        if (coinbase) {
+            this.props
+                .mutate({
+                    variables: {
+                        id: this.state.userId,
+                        publicAddress: coinbase
+                    }
+                })
+                .then(({ data }) => {})
+                .catch(error => {})
+        }
     }
 
     onLogin = data => {
@@ -75,4 +93,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default graphql(UpdateUserPublicAddress)(App)
