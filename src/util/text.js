@@ -61,7 +61,9 @@ const text = {
     Tipping: {
         tipBody: username => `Give ${username} a tip to show that you liked his post.`,
         ethAmount: 'Amount(Eth)',
-        usdAmount: 'Amount(USD)'
+        usdAmount: 'Amount(USD)',
+        tipButton: 'Tip',
+        closeTipModal: 'Close'
     },
     Submissions: {
         title: 'My posts'

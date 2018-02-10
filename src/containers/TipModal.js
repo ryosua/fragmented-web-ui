@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import debounce from 'lodash/debounce'
 import { Modal, Button } from 'react-bootstrap'
 import text from 'util/text'
 import FormField from 'components/FormField'
+import tip from 'util/tip'
 
-const { tipBody, ethAmount, usdAmount } = text.Tipping
+const { tipBody, ethAmount, usdAmount, tipButton, closeTipModal } = text.Tipping
 const defaultTipAmountInUsd = 1
 
 class TipModal extends React.Component {
@@ -26,7 +28,8 @@ class TipModal extends React.Component {
     }
 
     render() {
-        const { user, show, onClose, onTip, ethToUsdRate } = this.props
+        const { user, show, onClose, ethToUsdRate } = this.props
+        const onTip = debounce(() => tip(user, this.state.ethAmount), 1000)
         return (
             <Modal show={show} onHide={onClose}>
                 <div className="tipModal">
@@ -52,9 +55,9 @@ class TipModal extends React.Component {
                     )}
 
                     <Modal.Footer>
-                        <Button onClick={onClose}>Close</Button>
+                        <Button onClick={onClose}>{closeTipModal}</Button>
                         <Button onClick={onTip} bsStyle="primary" disabled={!this.state.ethAmount}>
-                            Tip
+                            {tipButton}
                         </Button>
                     </Modal.Footer>
                 </div>
@@ -67,7 +70,6 @@ TipModal.propTypes = {
     user: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onTip: PropTypes.func.isRequired,
     ethToUsdRate: PropTypes.number
 }
 

@@ -1,31 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import get from 'lodash/get'
 import text from 'util/text'
 import tippable from 'util/tippable'
 import TipModal from 'containers/TipModal'
-
-const eth = get(window, 'web3.eth', undefined)
-const amount = 1292607577265618
-
-const tip = user =>
-    eth.sendTransaction(
-        {
-            from: eth.coinbase,
-            to: user.publicAddress,
-            value: amount
-        },
-        (error, result) => {
-            if (!error) {
-                console.log('Transaction successul!')
-                console.log(result)
-            } else {
-                console.log('Error sending transaction.')
-                console.log(error)
-            }
-        }
-    )
 
 class NewsFeedItemDetail extends React.Component {
     state = {
@@ -45,7 +23,6 @@ class NewsFeedItemDetail extends React.Component {
                     user={user}
                     show={this.state.showTipModel}
                     onClose={this.handleCloseTipModal}
-                    onTip={() => tip(user)}
                     ethToUsdRate={ethToUsdRate}
                 />
                 <p>
