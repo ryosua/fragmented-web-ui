@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
+import ReactMarkdown from 'react-markdown'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
 import NewsItemType from 'graphql/enums/NewsItemType'
 import CommentList from 'components/CommentList'
@@ -18,7 +19,7 @@ const renderNewsItem = (params, userId) => {
     return (
         <div>
             {type === NewsItemType.TEXT ? <TextNewsItemTitle /> : <LinkNewsItemTitle />}
-            {type === NewsItemType.TEXT && <p>{text}</p>}
+            {type === NewsItemType.TEXT && <ReactMarkdown source={text} />}
             <CommentList {...params} newsItemId={id} userId={userId} />
         </div>
     )
