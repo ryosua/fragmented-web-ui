@@ -25,15 +25,11 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const coinbase = get(window, 'web3.eth.coinbase', undefined)
-        if (coinbase) {
+        const publicAddress = get(window, 'web3.eth.coinbase', undefined)
+        const id = this.state.userId
+        if (publicAddress && id) {
             this.props
-                .mutate({
-                    variables: {
-                        id: this.state.userId,
-                        publicAddress: coinbase
-                    }
-                })
+                .mutate({ variables: { id, publicAddress } })
                 .then(({ data }) => {})
                 .catch(error => {})
         }
