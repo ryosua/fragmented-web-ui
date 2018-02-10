@@ -17,6 +17,7 @@ const renderHR = (listLength, index) => {
 }
 
 class NewsFeedContainer extends React.Component {
+    state = {}
     componentDidMount() {
         getConversionRate()
             .then(rate => {
