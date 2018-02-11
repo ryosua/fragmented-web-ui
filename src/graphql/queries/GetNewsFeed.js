@@ -1,29 +1,12 @@
 import gql from 'graphql-tag'
-import UserFragment from '../fragments/UserFragment'
+import NewsItemFragment from '../fragments/NewsItemFragment'
 
 const GetNewsFeed = gql`
     query GetNewsFeedQuery($after: String) {
         allNewsItems(orderBy: creationTime_DESC, first: 7, after: $after) {
-            __typename
-            id
-            type
-            title
-            text
-            url
-            user {
-                ...UserFragment
-            }
-            comments {
-                __typename
-                id
-                user {
-                    ...UserFragment
-                }
-                creationTime
-                text
-            }
+            ...NewsItemFragment
         }
     }
-    ${UserFragment}
+    ${NewsItemFragment}
 `
 export default GetNewsFeed
