@@ -5,6 +5,7 @@ import text from 'util/text'
 import tippable from 'util/tippable'
 import TipModal from 'containers/TipModal'
 import PointerLink from 'styles/PointerLink'
+import { Badge } from 'react-bootstrap'
 
 class NewsFeedItemDetail extends React.Component {
     state = {
@@ -28,7 +29,11 @@ class NewsFeedItemDetail extends React.Component {
                 />
                 <p>
                     {`${text.NewsItems.usernamePrefix} ${user.username}  `}
-                    {tippable(web3Context, user) && <PointerLink onClick={this.handleShowTipModal}>(tip)</PointerLink>}
+                    {tippable(web3Context, user) && (
+                        <PointerLink onClick={this.handleShowTipModal}>
+                            <Badge>Tip</Badge>
+                        </PointerLink>
+                    )}
                 </p>
                 <Link to={{ pathname: pathname, search: `?id=${id}` }}>{`${numberOfComments} ${text.Comments.comments(
                     numberOfComments
