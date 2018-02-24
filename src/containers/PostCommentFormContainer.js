@@ -42,12 +42,12 @@ class PostCommentFormContainer extends Component {
                     id: newsItemId
                 }
                 const data = proxy.readQuery({ query: GetNewsItem, variables })
-                data.NewsItem.comments.push(createComment),
-                    proxy.writeQuery({
-                        query: GetNewsItem,
-                        variables,
-                        data
-                    })
+                data.NewsItem.comments.push(createComment)
+                proxy.writeQuery({
+                    query: GetNewsItem,
+                    variables,
+                    data
+                })
             }
         })
             .then(({ data }) => {
