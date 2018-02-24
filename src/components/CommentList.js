@@ -10,7 +10,7 @@ const CommentList = props => {
     return (
         <div>
             <h3>{comments.length > 0 ? commentsHeader : noCommentsHeader}</h3>
-            <PostCommentFormContainer newsItemId={props.newsItemId} userId={props.userId} />
+            <PostCommentFormContainer newsItemId={props.newsItemId} user={props.user} />
             {map(comments, (comment, index) => (
                 <div key={comment.id}>
                     <p>{`${comment.user.username}:`}</p>
@@ -25,7 +25,7 @@ const CommentList = props => {
 CommentList.propTypes = {
     comments: PropTypes.array.isRequired,
     newsItemId: PropTypes.string.isRequired,
-    userId: PropTypes.string
+    user: PropTypes.object
 }
 
 export default CommentList

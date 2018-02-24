@@ -8,7 +8,7 @@ import NewsItemType from 'graphql/enums/NewsItemType'
 import CommentList from 'components/CommentList'
 import text from 'util/text'
 
-const renderNewsItem = (params, userId) => {
+const renderNewsItem = (params, user) => {
     const { id, title, text, url, type } = params
     const TextNewsItemTitle = () => <h2>{title}</h2>
     const LinkNewsItemTitle = () => (
@@ -20,7 +20,7 @@ const renderNewsItem = (params, userId) => {
         <div>
             {type === NewsItemType.TEXT ? <TextNewsItemTitle /> : <LinkNewsItemTitle />}
             {type === NewsItemType.TEXT && <ReactMarkdown source={text} />}
-            <CommentList {...params} newsItemId={id} userId={userId} />
+            <CommentList {...params} newsItemId={id} user={user} />
         </div>
     )
 }
@@ -37,11 +37,11 @@ const NewsItemDetailView = props => {
     } else if (props.data && props.data.error) {
         return props.data ? <Error error={props.data.error} /> : <Error />
     }
-    return renderNewsItem(props.data.NewsItem, props.userId)
+    return renderNewsItem(props.data.NewsItem, props.user)
 }
 
 NewsItemDetailView.propTypes = {
-    userId: PropTypes.string
+    user: PropTypes.object
 }
 
 export default graphql(GetNewsItem, {

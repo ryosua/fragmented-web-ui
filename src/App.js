@@ -19,33 +19,33 @@ class App extends Component {
     constructor(props) {
         super(props)
         const token = localStorage.getItem('token')
-        const userId = localStorage.getItem('userId')
-        const isLoggedIn = !isEmpty(token) && !isEmpty(userId)
-        this.state = { isLoggedIn: isLoggedIn, userId: isLoggedIn ? userId : undefined }
+        const user = JSON.parse(localStorage.getItem('user'))
+        const isLoggedIn = !isEmpty(token) && !isEmpty(user)
+        this.state = { isLoggedIn: isLoggedIn, user: isLoggedIn ? user : undefined }
     }
 
     componentDidMount() {
         const publicAddress = get(window, 'web3.eth.coinbase', undefined)
-        const id = this.state.userId
-        if (publicAddress && id) {
+        const user = this.state.user
+        if (publicAddress && user) {
             this.props
-                .mutate({ variables: { id, publicAddress } })
+                .mutate({ variables: { id: user.id, publicAddress } })
                 .then(({ data }) => {})
                 .catch(error => {})
         }
     }
 
     onLogin = data => {
-        const userId = data.signinUser.user.id
+        const user = data.signinUser.user
         localStorage.setItem('token', data.signinUser.token)
-        localStorage.setItem('userId', userId)
-        this.setState({ isLoggedIn: true, userId: userId })
+        localStorage.setItem('user', JSON.stringify(user))
+        this.setState({ isLoggedIn: true, user: user })
     }
 
     onLogout = () => {
         localStorage.removeItem('token')
-        localStorage.removeItem('userId')
-        this.setState({ isLoggedIn: false, userId: undefined })
+        localStorage.removeItem('user')
+        this.setState({ isLoggedIn: false, user: undefined })
     }
 
     render() {
@@ -65,7 +65,7 @@ class App extends Component {
                             path="/create-post"
                             render={() => (
                                 <CreateNewsItemContainer
-                                    userId={this.state.userId}
+                                    userId={this.state.user.id}
                                     isLoggedIn={this.state.isLoggedIn}
                                 />
                             )}
@@ -76,7 +76,7 @@ class App extends Component {
                                 <NewsItemDetailView
                                     {...props}
                                     isLoggedIn={this.state.isLoggedIn}
-                                    userId={this.state.userId}
+                                    user={this.state.user}
                                 />
                             )}
                         />

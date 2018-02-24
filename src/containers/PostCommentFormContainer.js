@@ -3,33 +3,55 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import isEmpty from 'lodash/isEmpty'
 import PostComment from 'graphql/mutations/PostComment'
+import GetNewsItem from 'graphql/queries/GetNewsItem'
 import PostCommentForm from 'components/PostCommentForm'
 import text from 'util/text'
 
 class PostCommentFormContainer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            commentText: '',
-            hasError: false
-        }
+    state = {
+        commentText: '',
+        hasError: false
     }
 
     handleTextFieldChange = e => this.setState({ commentText: e.target.value })
 
     handleSubmitPress = () => {
-        const { mutate, newsItemId, userId } = this.props
+        const { mutate, newsItemId, user } = this.props
+
+        const creationTime = new Date()
+        const text = this.state.commentText
 
         mutate({
             variables: {
-                creationTime: new Date(),
-                text: this.state.commentText,
-                newsItemId: newsItemId,
-                userId: userId
+                creationTime,
+                text,
+                newsItemId,
+                userId: user.id
+            },
+            optimisticResponse: {
+                createComment: {
+                    __typename: 'Comment',
+                    text,
+                    id: 'temp',
+                    user,
+                    creationTime
+                }
+            },
+            update: (proxy, { data: { createComment } }) => {
+                const variables = {
+                    id: newsItemId
+                }
+                const data = proxy.readQuery({ query: GetNewsItem, variables })
+                data.NewsItem.comments.push(createComment),
+                    proxy.writeQuery({
+                        query: GetNewsItem,
+                        variables,
+                        data
+                    })
             }
         })
             .then(({ data }) => {
-                console.log('got data', data)
+                console.log('got data', JSON.stringify(data))
                 this.setState({ commentText: '' })
             })
             .catch(error => {
@@ -41,7 +63,7 @@ class PostCommentFormContainer extends Component {
     render() {
         return (
             <div>
-                {!isEmpty(this.props.userId) ? (
+                {!isEmpty(this.props.user) ? (
                     <PostCommentForm
                         comment={this.state.commentText}
                         onChange={this.handleTextFieldChange}
@@ -57,7 +79,7 @@ class PostCommentFormContainer extends Component {
 
 PostCommentFormContainer.propTypes = {
     newsItemId: PropTypes.string.isRequired,
-    userId: PropTypes.string
+    user: PropTypes.object
 }
 
 export default graphql(PostComment)(PostCommentFormContainer)
