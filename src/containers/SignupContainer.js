@@ -8,7 +8,7 @@ import text from 'util/text'
 const clientErrorMessages = text.clientErrorMessages
 
 const validatePasswordsMatch = (passwordValue, confirmPasswordValue) => passwordValue === confirmPasswordValue
-const validateEmail = email => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+const validateEmail = email => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)
 const MINIMUM_CHARACTERS_FOR_PASSWORDS = 9
 const validatePasswordRequirementsMet = password => password.length >= MINIMUM_CHARACTERS_FOR_PASSWORDS
 
