@@ -33,6 +33,12 @@ const Navigation = props => (
                             <MenuItem>{text.Submissions.title}</MenuItem>
                         </LinkContainer>
                     )}
+                    {props.isLoggedIn &&
+                        !props.hasAddress && (
+                            <LinkContainer to="/">
+                                <MenuItem>{text.Tipping.unlinkedAccountNavHelp}</MenuItem>
+                            </LinkContainer>
+                        )}
                     {props.isLoggedIn && (
                         <LinkContainer to="/logout">
                             <MenuItem>{text.app.logout}</MenuItem>
@@ -45,7 +51,8 @@ const Navigation = props => (
 )
 
 Navigation.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
+    hasAddress: PropTypes.bool.isRequired
 }
 
 export default Navigation

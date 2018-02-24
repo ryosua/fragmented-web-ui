@@ -63,7 +63,8 @@ const text = {
         ethAmount: 'Amount(Eth)',
         usdAmount: 'Amount(USD)',
         tipButton: 'Tip',
-        closeTipModal: 'Close'
+        closeTipModal: 'Close',
+        unlinkedAccountNavHelp: 'Link Account to Recieve Tips'
     },
     Submissions: {
         title: 'My posts'

@@ -24,8 +24,12 @@ class App extends Component {
         this.state = { isLoggedIn: isLoggedIn, user: isLoggedIn ? user : undefined }
     }
 
+    getPublicAddressFromBrowser = () => get(window, 'web3.eth.coinbase', undefined)
+
+    userHasRegisteredAnAddress = () => !!get(this.state, 'user.publicAddress', undefined)
+
     componentDidMount() {
-        const publicAddress = get(window, 'web3.eth.coinbase', undefined)
+        const publicAddress = this.getPublicAddressFromBrowser()
         const user = this.state.user
         if (publicAddress && user) {
             this.props
@@ -49,11 +53,12 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.userHasRegisteredAnAddress())
         return (
             <div className="App">
                 <Router>
                     <div>
-                        <Navigation isLoggedIn={this.state.isLoggedIn} />
+                        <Navigation isLoggedIn={this.state.isLoggedIn} hasAddress={this.userHasRegisteredAnAddress()} />
                         <Route exact path="/" component={Home} />
                         <Route path="/newest" component={NewsFeedContainer} />
                         <Route path="/signup" component={SignupContainer} />
