@@ -49,7 +49,7 @@ class NewsFeedContainer extends React.Component {
                                 url={newsItem.url}
                                 comments={newsItem.comments}
                                 type={newsItem.type}
-                                user={newsItem.user}
+                                author={newsItem.user}
                                 ethToUsdRate={this.state.ethToUsdRate}
                             />
                         ) : (
@@ -60,7 +60,7 @@ class NewsFeedContainer extends React.Component {
                                 text={newsItem.text}
                                 comments={newsItem.comments}
                                 type={newsItem.type}
-                                user={newsItem.user}
+                                author={newsItem.user}
                                 ethToUsdRate={this.state.ethToUsdRate}
                             />
                         )}

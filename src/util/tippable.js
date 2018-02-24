@@ -1,5 +1,5 @@
-const tippable = (web3Context, user) => {
-    return web3Context.networkId === '1' && web3Context.selectedAccount && user.publicAddress
+const tippable = (web3Context, recipient) => {
+    return web3Context.networkId === '1' && web3Context.selectedAccount && recipient.publicAddress
 }
 
 export default tippable

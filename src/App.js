@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
 import isEmpty from 'lodash/isEmpty'
@@ -14,26 +15,30 @@ import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
 import Logout from 'components/Logout'
 import NewsItemDetailView from 'components/NewsItemDetailView'
 import UpdateUserPublicAddress from 'graphql/mutations/UpdateUserPublicAddress'
+import getPublicAddressFromContext from 'util/getPublicAddressFromContext'
+
+const storageKeys = {
+    USER: 'user',
+    TOKEN: 'token'
+}
 
 class App extends Component {
     constructor(props) {
         super(props)
-        const token = localStorage.getItem('token')
-        const user = JSON.parse(localStorage.getItem('user'))
-        const isLoggedIn = !isEmpty(token) && !isEmpty(user)
-        this.state = { isLoggedIn: isLoggedIn, user: isLoggedIn ? user : undefined }
+        const token = localStorage.getItem(storageKeys.TOKEN)
+        const storedUserJSON = localStorage.getItem(storageKeys.USER)
+        const storedUser = storedUserJSON && storedUserJSON !== 'undefined' && JSON.parse(storedUserJSON)
+        const isLoggedIn = !isEmpty(token) && !isEmpty(storedUser)
+        this.state = { isLoggedIn: isLoggedIn, storedUser: isLoggedIn ? storedUser : undefined }
     }
 
-    getPublicAddressFromBrowser = () => get(window, 'web3.eth.coinbase', undefined)
-
-    userHasRegisteredAnAddress = () => !!get(this.state, 'user.publicAddress', undefined)
-
     componentDidMount() {
-        const publicAddress = this.getPublicAddressFromBrowser()
-        const user = this.state.user
-        if (publicAddress && user) {
+        const web3Context = this.context.web3
+        const publicAddress = getPublicAddressFromContext(web3Context)
+        const storedUser = this.state.storedUser
+        if (publicAddress && storedUser) {
             this.props
-                .mutate({ variables: { id: user.id, publicAddress } })
+                .mutate({ variables: { id: storedUser.id, publicAddress } })
                 .then(({ data }) => {})
                 .catch(error => {})
         }
@@ -41,24 +46,26 @@ class App extends Component {
 
     onLogin = data => {
         const user = data.signinUser.user
-        localStorage.setItem('token', data.signinUser.token)
-        localStorage.setItem('user', JSON.stringify(user))
-        this.setState({ isLoggedIn: true, user: user })
+        localStorage.setItem(storageKeys.TOKEN, data.signinUser.token)
+        localStorage.setItem(storageKeys.USER, JSON.stringify(user))
+        this.setState({ isLoggedIn: true, storedUser: user })
     }
 
     onLogout = () => {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        this.setState({ isLoggedIn: false, user: undefined })
+        localStorage.removeItem(storageKeys.TOKEN)
+        localStorage.removeItem(storageKeys.USER)
+        this.setState({ isLoggedIn: false, storedUser: undefined })
     }
 
     render() {
-        console.log(this.userHasRegisteredAnAddress())
         return (
             <div className="App">
                 <Router>
                     <div>
-                        <Navigation isLoggedIn={this.state.isLoggedIn} hasAddress={this.userHasRegisteredAnAddress()} />
+                        <Navigation
+                            isLoggedIn={this.state.isLoggedIn}
+                            userId={get(this.state, 'storedUser.id', undefined)}
+                        />
                         <Route exact path="/" component={Home} />
                         <Route path="/newest" component={NewsFeedContainer} />
                         <Route path="/signup" component={SignupContainer} />
@@ -70,7 +77,7 @@ class App extends Component {
                             path="/create-post"
                             render={() => (
                                 <CreateNewsItemContainer
-                                    userId={this.state.user.id}
+                                    userId={this.state.storedUser.id}
                                     isLoggedIn={this.state.isLoggedIn}
                                 />
                             )}
@@ -81,7 +88,7 @@ class App extends Component {
                                 <NewsItemDetailView
                                     {...props}
                                     isLoggedIn={this.state.isLoggedIn}
-                                    user={this.state.user}
+                                    storedUser={this.state.storedUser}
                                 />
                             )}
                         />
@@ -92,6 +99,10 @@ class App extends Component {
             </div>
         )
     }
+}
+
+App.contextTypes = {
+    web3: PropTypes.object
 }
 
 export default graphql(UpdateUserPublicAddress)(App)

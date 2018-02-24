@@ -64,7 +64,8 @@ const text = {
         usdAmount: 'Amount(USD)',
         tipButton: 'Tip',
         closeTipModal: 'Close',
-        unlinkedAccountNavHelp: 'Link Account to Recieve Tips'
+        unlinkedAccountNavHelp: 'Link Account to Recieve Tips',
+        linkButton: 'Link Address'
     },
     Submissions: {
         title: 'My posts'

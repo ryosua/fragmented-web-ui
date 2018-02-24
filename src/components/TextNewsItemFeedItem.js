@@ -13,7 +13,7 @@ const TextNewsItemFeedItem = props => {
             <NewsFeedItemDetail
                 id={props.id}
                 comments={props.comments}
-                user={props.user}
+                author={props.author}
                 pathname="/news-item-detail"
                 ethToUsdRate={props.ethToUsdRate}
             />
@@ -27,7 +27,7 @@ TextNewsItemFeedItem.propTypes = {
     index: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
     ethToUsdRate: PropTypes.number
 }
 

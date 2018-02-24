@@ -28,15 +28,15 @@ class TipModal extends React.Component {
     }
 
     render() {
-        const { user, show, onClose, ethToUsdRate } = this.props
-        const onTip = debounce(() => tip(user, this.state.ethAmount), 1000)
+        const { recipient, show, onClose, ethToUsdRate } = this.props
+        const onTip = debounce(() => tip(recipient, this.state.ethAmount), 1000)
         return (
             <Modal show={show} onHide={onClose}>
-                <div className="tipModal">
+                <div className="modal-custom">
                     <Modal.Header>
-                        <Modal.Title>Tip {user.username}</Modal.Title>
+                        <Modal.Title>Tip {recipient.username}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{tipBody(user.username)}</Modal.Body>
+                    <Modal.Body>{tipBody(recipient.username)}</Modal.Body>
                     <FormField
                         label={ethAmount}
                         type="number"
@@ -67,7 +67,7 @@ class TipModal extends React.Component {
 }
 
 TipModal.propTypes = {
-    user: PropTypes.object.isRequired,
+    recipient: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     ethToUsdRate: PropTypes.number

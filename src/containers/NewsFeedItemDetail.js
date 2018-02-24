@@ -17,19 +17,19 @@ class NewsFeedItemDetail extends React.Component {
 
     render() {
         const web3Context = this.context.web3
-        const { user, pathname, id, comments, ethToUsdRate } = this.props
+        const { author, pathname, id, comments, ethToUsdRate } = this.props
         const numberOfComments = comments.length
         return (
             <div>
                 <TipModal
-                    user={user}
+                    recipient={author}
                     show={this.state.showTipModel}
                     onClose={this.handleCloseTipModal}
                     ethToUsdRate={ethToUsdRate}
                 />
                 <p>
-                    {`${text.NewsItems.usernamePrefix} ${user.username}  `}
-                    {tippable(web3Context, user) && (
+                    {`${text.NewsItems.usernamePrefix} ${author.username}  `}
+                    {tippable(web3Context, author) && (
                         <PointerLink onClick={this.handleShowTipModal}>
                             <Badge>Tip</Badge>
                         </PointerLink>
@@ -46,7 +46,7 @@ class NewsFeedItemDetail extends React.Component {
 NewsFeedItemDetail.propTypes = {
     id: PropTypes.string.isRequired,
     comments: PropTypes.array.isRequired,
-    user: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
     state: PropTypes.object,
     ethToUsdRate: PropTypes.number
