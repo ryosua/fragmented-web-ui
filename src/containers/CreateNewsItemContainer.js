@@ -9,10 +9,17 @@ import NewsItemType from 'graphql/enums/NewsItemType'
 import CreateLinkNewsItemForm from 'components/CreateLinkNewsItemForm'
 import CreateTextNewsItemForm from 'components/CreateTextNewsItemForm'
 import CreatePostHeader from 'components/CreatePostHeader'
+import CenteredColumn from 'styles/CenteredColumn'
+import FlexColumn from 'styles/FlexColumn'
 
 const clientErrorMessages = text.clientErrorMessages
 
 const validateEntry = value => value !== ''
+
+const Container = FlexColumn.extend`
+    width: 75%;
+    padding: 20px;
+`
 
 const postTypeMapping = {
     [NewsItemType.LINK]: { radioValue: 0, title: text.Posting.createLinkPostTitle },
@@ -100,15 +107,23 @@ class CreateNewsItemContainer extends React.Component {
         return (
             <div>
                 {(!this.props.isLoggedIn || this.state.postSubmitted) && <Redirect to="/newest" />}
-                <CreatePostHeader
-                    pageTitle={valueToType[this.state.postTypeSelectedValue].title}
-                    postTypeMapping={postTypeMapping}
-                    postTypeSelectedValue={this.state.postTypeSelectedValue}
-                    onPostTypeSelect={this.onPostTypeSelect}
-                />
-                <br />
-                {this.getPostType() === NewsItemType.LINK && <CreateLinkNewsItemForm {...createNewsItemProps} />}
-                {this.getPostType() === NewsItemType.TEXT && <CreateTextNewsItemForm {...createNewsItemProps} />}
+                <CenteredColumn>
+                    <Container>
+                        <CreatePostHeader
+                            pageTitle={valueToType[this.state.postTypeSelectedValue].title}
+                            postTypeMapping={postTypeMapping}
+                            postTypeSelectedValue={this.state.postTypeSelectedValue}
+                            onPostTypeSelect={this.onPostTypeSelect}
+                        />
+                        <br />
+                        {this.getPostType() === NewsItemType.LINK && (
+                            <CreateLinkNewsItemForm {...createNewsItemProps} />
+                        )}
+                        {this.getPostType() === NewsItemType.TEXT && (
+                            <CreateTextNewsItemForm {...createNewsItemProps} />
+                        )}
+                    </Container>
+                </CenteredColumn>
             </div>
         )
     }
