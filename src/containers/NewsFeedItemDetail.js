@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import text from 'util/text'
 import tippable from 'util/tippable'
 import TipModal from 'containers/TipModal'
+import PointerLink from 'styles/PointerLink'
 
 class NewsFeedItemDetail extends React.Component {
     state = {
@@ -27,11 +28,7 @@ class NewsFeedItemDetail extends React.Component {
                 />
                 <p>
                     {`${text.NewsItems.usernamePrefix} ${user.username}  `}
-                    {tippable(web3Context, user) && (
-                        <a id="tipButton" onClick={this.handleShowTipModal}>
-                            (tip)
-                        </a>
-                    )}
+                    {tippable(web3Context, user) && <PointerLink onClick={this.handleShowTipModal}>(tip)</PointerLink>}
                 </p>
                 <Link to={{ pathname: pathname, search: `?id=${id}` }}>{`${numberOfComments} ${text.Comments.comments(
                     numberOfComments

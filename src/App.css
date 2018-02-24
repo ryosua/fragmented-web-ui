@@ -12,11 +12,6 @@
 .App-title {
     font-size: 1.5em;
 }
-
-#tipButton {
-    cursor: pointer;
-}
-
 .tipModal {
     padding: 20px;
 }
