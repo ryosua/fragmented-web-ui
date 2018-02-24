@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import debounce from 'lodash/debounce'
 import { graphql } from 'react-apollo'
 import { Modal, Button } from 'react-bootstrap'
 import text from 'util/text'
@@ -17,13 +18,22 @@ const {
 const readyToLink = web3Context => web3Context.networkId === '1' && web3Context.selectedAccount
 
 class RegisterPublicAddressModal extends React.Component {
-    linkAccount = web3Context => {
+    state = { linkingAccount: false }
+
+    linkAccount = debounce(web3Context => {
+        this.setState({ linkingAccount: true })
         const publicAddress = getPublicAddressFromContext(web3Context)
         this.props
             .mutate({ variables: { id: this.props.user.id, publicAddress } })
-            .then(({ data }) => console.log('registered address from Modal'))
-            .catch(error => console.log(error))
-    }
+            .then(({ data }) => {
+                this.setState({ linkingAccount: false })
+                console.log('registered address from Modal')
+            })
+            .catch(error => {
+                this.setState({ linkingAccount: false })
+                console.log(error)
+            })
+    }, 1000)
 
     render() {
         const { show, onClose } = this.props
@@ -52,7 +62,7 @@ class RegisterPublicAddressModal extends React.Component {
                         <Button
                             onClick={() => this.linkAccount(web3Context)}
                             bsStyle="primary"
-                            disabled={!readyToLink(web3Context)}>
+                            disabled={!readyToLink(web3Context) || this.state.linkingAccount}>
                             {linkButton}
                         </Button>
                     </Modal.Footer>
