@@ -6,7 +6,13 @@ import text from 'util/text'
 import UpdateUserPublicAddress from 'graphql/mutations/UpdateUserPublicAddress'
 import getPublicAddressFromContext from 'util/getPublicAddressFromContext'
 
-const { unlinkedAccountNavHelp, closeTipModal, linkButton } = text.Tipping
+const {
+    unlinkedAccountNavHelp,
+    unlinkedAccountHelpBody,
+    unlinkedAccountHelpConclusion,
+    closeTipModal,
+    linkButton
+} = text.Tipping
 
 const readyToLink = web3Context => web3Context.networkId === '1' && web3Context.selectedAccount
 
@@ -29,11 +35,7 @@ class RegisterPublicAddressModal extends React.Component {
                         <Modal.Title> {unlinkedAccountNavHelp}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>
-                            To recieve tips on Fragmented you have to register a public address with your account. Once
-                            you have done that, users who have MetaMask installed and unlocked, will see a tip button
-                            next to your username. Follow these steps to link your address:
-                        </p>
+                        <p>{unlinkedAccountHelpBody}</p>
                         <ol>
                             <li>
                                 If you do not have MetaMask installed,{' '}
@@ -43,11 +45,7 @@ class RegisterPublicAddressModal extends React.Component {
                             <li>Unlock your MetaMask wallet</li>
                             <li>{`Click the "${linkButton}" button below`}</li>
                         </ol>
-                        <p>
-                            You only have to do this once, and your address will be registered with your account. This
-                            will let you recive tips, as well as send tips. The tip buttons throughout the site will
-                            only show when your MetaMask wallet is unlocked.
-                        </p>
+                        <p>{unlinkedAccountHelpConclusion}</p>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={onClose}>{closeTipModal}</Button>

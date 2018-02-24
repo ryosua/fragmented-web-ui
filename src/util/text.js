@@ -65,6 +65,10 @@ const text = {
         tipButton: 'Tip',
         closeTipModal: 'Close',
         unlinkedAccountNavHelp: 'Link Account to Recieve Tips',
+        unlinkedAccountHelpBody:
+            'To recieve tips on Fragmented you have to register a public address with your account. Once you have done that, users who have MetaMask installed and unlocked, will see a tip button next to your username. Follow these steps to link your address:',
+        unlinkedAccountHelpConclusion:
+            'You only have to do this once, and your address will be registered with your account. This will let you recive tips, as well as send tips. The tip buttons throughout the site will only show when your MetaMask wallet is unlocked.',
         linkButton: 'Link Address'
     },
     Submissions: {
