@@ -75,8 +75,8 @@ class PostCommentFormContainer extends Component {
                         onSubmit={this.handleSubmitPress}
                     />
                 ) : (
-                        <p>{text.Comments.unauthenticatedMessage}</p>
-                    )}
+                    <p>{text.Comments.unauthenticatedMessage}</p>
+                )}
             </div>
         )
     }

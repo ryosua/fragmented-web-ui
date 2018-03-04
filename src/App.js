@@ -16,6 +16,7 @@ import Logout from 'components/Logout'
 import NewsItemDetailView from 'components/NewsItemDetailView'
 import UpdateUserPublicAddress from 'graphql/mutations/UpdateUserPublicAddress'
 import getPublicAddressFromContext from 'util/getPublicAddressFromContext'
+import getConversionRate from 'util/getConversionRate'
 
 const storageKeys = {
     USER: 'user',
@@ -42,6 +43,14 @@ class App extends Component {
                 .then(({ data }) => {})
                 .catch(error => {})
         }
+
+        getConversionRate()
+            .then(rate => {
+                this.setState({ ethToUsdRate: rate })
+            })
+            .catch(error => {
+                console.log('error getting conversion rate')
+            })
     }
 
     onLogin = data => {
@@ -67,7 +76,10 @@ class App extends Component {
                             userId={get(this.state, 'storedUser.id', undefined)}
                         />
                         <Route exact path="/" component={Home} />
-                        <Route path="/newest" component={NewsFeedContainer} />
+                        <Route
+                            path="/newest"
+                            render={props => <NewsFeedContainer {...props} ethToUsdRate={this.state.ethToUsdRate} />}
+                        />
                         <Route path="/signup" component={SignupContainer} />
                         <Route
                             path="/login"
@@ -82,7 +94,10 @@ class App extends Component {
                                 />
                             )}
                         />
-                        <Route path="/news-item-detail" component={NewsItemDetailView} />
+                        <Route
+                            path="/news-item-detail"
+                            render={props => <NewsItemDetailView {...props} ethToUsdRate={this.state.ethToUsdRate} />}
+                        />
                         <Route path="/submissions" component={Submissions} />
                         <Route path="/logout" render={() => <Logout onLogout={this.onLogout} />} />
                     </div>

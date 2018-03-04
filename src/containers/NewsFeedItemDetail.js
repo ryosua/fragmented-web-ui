@@ -10,11 +10,7 @@ class NewsFeedItemDetail extends React.Component {
         const numberOfComments = comments.length
         return (
             <div>
-                <TippableAuthor
-                    author={author}
-                    handleShowTipModal={this.handleShowTipModal}
-                    ethToUsdRate={ethToUsdRate}
-                />
+                <TippableAuthor author={author} ethToUsdRate={ethToUsdRate} />
                 <Link to={{ pathname: pathname, search: `?id=${id}` }}>{`${numberOfComments} ${text.Comments.comments(
                     numberOfComments
                 )}`}</Link>
