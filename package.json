@@ -29,6 +29,6 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "predeploy": "yarn run build",
-        "deploy": "yarn run build && ren .\\build\\index.html \"200.html\" && surge ./build beta.fragmented.world"
+        "deploy": "yarn run build && ren .\\build\\index.html \"200.html\" && surge ./build fragmented.surge.sh"
     }
 }
