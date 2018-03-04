@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
 import PostComment from 'graphql/mutations/PostComment'
+import GetMe from 'graphql/queries/GetMe'
 import GetNewsItem from 'graphql/queries/GetNewsItem'
 import PostCommentForm from 'components/PostCommentForm'
 import text from 'util/text'
@@ -16,8 +18,8 @@ class PostCommentFormContainer extends Component {
     handleTextFieldChange = e => this.setState({ commentText: e.target.value })
 
     handleSubmitPress = () => {
-        const { mutate, newsItemId, user } = this.props
-
+        const { mutate, newsItemId } = this.props
+        const user = this.getMe()
         const creationTime = new Date()
         const text = this.state.commentText
 
@@ -60,26 +62,28 @@ class PostCommentFormContainer extends Component {
             })
     }
 
+    getMe = () => get(this.props, 'data.user')
+
     render() {
+        const me = this.getMe()
         return (
             <div>
-                {!isEmpty(this.props.user) ? (
+                {!isEmpty(me) ? (
                     <PostCommentForm
                         comment={this.state.commentText}
                         onChange={this.handleTextFieldChange}
                         onSubmit={this.handleSubmitPress}
                     />
                 ) : (
-                    <p>{text.Comments.unauthenticatedMessage}</p>
-                )}
+                        <p>{text.Comments.unauthenticatedMessage}</p>
+                    )}
             </div>
         )
     }
 }
 
 PostCommentFormContainer.propTypes = {
-    newsItemId: PropTypes.string.isRequired,
-    user: PropTypes.object
+    newsItemId: PropTypes.string.isRequired
 }
 
-export default graphql(PostComment)(PostCommentFormContainer)
+export default compose(graphql(PostComment), graphql(GetMe))(PostCommentFormContainer)
