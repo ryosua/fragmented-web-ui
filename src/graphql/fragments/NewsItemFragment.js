@@ -3,7 +3,6 @@ import UserFragment from '../fragments/UserFragment'
 
 const NewsItemFragment = gql`
     fragment NewsItemFragment on NewsItem {
-        __typename
         id
         type
         text
@@ -13,7 +12,6 @@ const NewsItemFragment = gql`
             ...UserFragment
         }
         comments {
-            __typename
             id
             user {
                 ...UserFragment

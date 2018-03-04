@@ -17,7 +17,6 @@ const CreateLinkNewsItem = gql`
             text: $text
             type: $type
         ) {
-            __typename
             id
         }
     }
