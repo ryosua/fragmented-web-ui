@@ -22,8 +22,6 @@ contract Curation {
             string memory id = posts[i].id;
             if (compareStrings(id, _id)) {
                 return true;
-            } else {
-                i++;
             }
         }
         return false;
