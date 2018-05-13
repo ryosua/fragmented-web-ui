@@ -28,7 +28,7 @@ contract Curation {
     }
     
     function createPost(string _id) external returns(bool) {
-        if (postExists(_id)) {
+        if (!postExists(_id)) {
             Post memory newPost = Post(_id, 0, 0, new address[](0), new address[](0));
             posts.push(newPost);
             idToPost[_id] = newPost;
