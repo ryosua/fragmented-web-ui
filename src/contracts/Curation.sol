@@ -4,8 +4,6 @@ contract Curation {
     
     struct Post {
         string id;
-        uint upVotes;
-        uint downVotes;
         address[] upVoters;
         address[] downVoters;
     }
