@@ -13,7 +13,17 @@ contract Curation {
 
     function compareStrings(string string1, string string2) internal pure returns(bool) {
         return keccak256(string1) == keccak256(string2);
-    } 
+    }
+    
+    function containsAddress(address searchAddress, address[] addressArray) internal pure returns(bool) {
+        for (uint i = 0; i < addressArray.length; i++) {
+            address addressI = addressArray[i];
+            if (searchAddress == addressI) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     function postExists(string _id) internal view returns(bool) {
         for (uint i = 0; i < posts.length; i++) {
