@@ -63,4 +63,17 @@ contract Curation {
         post.downVoters.push(msg.sender);
         emit PostDownVoted(msg.sender, _id);
     }
+
+    function getPostScore(string _id) external view returns(uint) {
+        require(postExists(_id));
+        uint total = 0;
+        Post storage post = idToPost[_id];
+        for (uint i = 0; i < post.upVoters.length; i++) {
+            total += post.upVoters[i].balance;
+        }
+        for (uint j = 0; j < post.downVoters.length; j++) {
+            total -= post.downVoters[j].balance;
+        }
+        return total;
+    }
 }
