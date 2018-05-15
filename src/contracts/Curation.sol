@@ -45,4 +45,25 @@ contract Curation {
         return false;
     }
 
+    function upVotePost(string _id) external returns(bool) {
+        if (postExists(_id) ) {
+            Post storage post = idToPost[_id];
+            if (!containsAddress(msg.sender, post.upVoters)) {
+                post.upVoters.push(msg.sender);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function downVotePost(string _id) external returns(bool) {
+        if (postExists(_id) ) {
+            Post storage post = idToPost[_id];
+            if (!containsAddress(msg.sender, post.downVoters)) {
+                post.downVoters.push(msg.sender);
+                return true;
+            }
+        }
+        return false;
+    }
 }
