@@ -9,7 +9,12 @@ contract Curation {
     }
     
     Post[] public posts;
+
     mapping (string => Post) idToPost;
+
+    event PostCreated(address _from, string _id);
+    event PostUpVoted(address _from, string _id);
+    event PostDownVoted(address _from, string _id);
 
     function compareStrings(string string1, string string2) internal pure returns(bool) {
         return keccak256(string1) == keccak256(string2);
@@ -35,35 +40,27 @@ contract Curation {
         return false;
     }
     
-    function createPost(string _id) external returns(bool) {
-        if (!postExists(_id)) {
-            Post memory newPost = Post(_id, new address[](0), new address[](0));
-            posts.push(newPost);
-            idToPost[_id] = newPost;
-            return true;
-        }
-        return false;
+    function createPost(string _id) external {
+        require(!postExists(_id));
+        Post memory newPost = Post(_id, new address[](0), new address[](0));
+        posts.push(newPost);
+        idToPost[_id] = newPost;
+        emit PostCreated(msg.sender, _id);
     }
 
-    function upVotePost(string _id) external returns(bool) {
-        if (postExists(_id) ) {
-            Post storage post = idToPost[_id];
-            if (!containsAddress(msg.sender, post.upVoters)) {
-                post.upVoters.push(msg.sender);
-                return true;
-            }
-        }
-        return false;
+    function upVotePost(string _id) external {
+        require(postExists(_id));
+        Post storage post = idToPost[_id];
+        require(!containsAddress(msg.sender, post.upVoters));
+        post.upVoters.push(msg.sender);
+        emit PostUpVoted(msg.sender, _id);
     }
 
-    function downVotePost(string _id) external returns(bool) {
-        if (postExists(_id) ) {
-            Post storage post = idToPost[_id];
-            if (!containsAddress(msg.sender, post.downVoters)) {
-                post.downVoters.push(msg.sender);
-                return true;
-            }
-        }
-        return false;
+    function downVotePost(string _id) external {
+        require(postExists(_id));
+        Post storage post = idToPost[_id];
+        require (!containsAddress(msg.sender, post.downVoters));
+        post.downVoters.push(msg.sender);
+        emit PostDownVoted(msg.sender, _id);
     }
 }
