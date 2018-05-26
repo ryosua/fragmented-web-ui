@@ -61,10 +61,7 @@ class App extends Component {
                                     render={props => <NewsFeedContainer {...props} ethToUsdRate={ethToUsdRate} />}
                                 />
                                 <Route path="/signup" component={SignupContainer} />
-                                <Route
-                                    path="/login"
-                                    render={() => <LoginContainer onLogin={onLogin} isLoggedIn={isLoggedIn} />}
-                                />
+                                <Route path="/login" render={() => <LoginContainer onLogin={onLogin} />} />
                                 <Route
                                     path="/create-post"
                                     render={() => (
