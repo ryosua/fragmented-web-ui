@@ -54,7 +54,7 @@ class App extends Component {
                     <div className="App">
                         <Router>
                             <div>
-                                <Navigation isLoggedIn={isLoggedIn} userId={storedUserId} />
+                                <Navigation userId={storedUserId} />
                                 <Route exact path="/" component={Home} />
                                 <Route
                                     path="/newest"
