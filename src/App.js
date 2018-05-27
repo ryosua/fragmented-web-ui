@@ -5,7 +5,7 @@ import 'App.css'
 import { graphql } from 'react-apollo'
 import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
-import Navigation from 'components/Navigation'
+import NavigationContainer from 'containers/NavigationContainer'
 import LoginContainer from 'containers/LoginContainer'
 import SignupContainer from 'containers/SignupContainer'
 import Submissions from 'components/Submissions'
@@ -51,7 +51,7 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <div>
-                        <Navigation />
+                        <NavigationContainer />
                         <Route exact path="/" component={Home} />
                         <Route
                             path="/newest"
