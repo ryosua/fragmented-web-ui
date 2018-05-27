@@ -30,5 +30,10 @@
         "eject": "react-scripts eject",
         "predeploy": "yarn run build",
         "deploy": "yarn run build && ren .\\build\\index.html \"200.html\" && surge ./build beta.fragmented.world"
+    },
+    "devDependencies": {
+        "enzyme": "3.3.0",
+        "enzyme-adapter-react-16": "1.1.1",
+        "react-test-renderer": "16.4.0"
     }
 }
