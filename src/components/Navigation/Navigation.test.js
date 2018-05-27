@@ -4,7 +4,7 @@ import noop from 'lodash/noop'
 import Navigation from 'components/Navigation'
 import ShallowRenderer from 'react-test-renderer/shallow'
 
-it('Navigation renders correctlyt', () => {
+it('Navigation renders correctly', () => {
     const renderer = new ShallowRenderer()
     const result = renderer.render(
         <Navigation
