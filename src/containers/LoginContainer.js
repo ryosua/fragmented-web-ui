@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { Redirect } from 'react-router'
+import AuthContext from 'contexts/AuthContext'
 import LoginForm from 'components/LoginForm'
 import Login from 'graphql/mutations/Login'
 import AuthProviderLoginData from 'graphql/dtos/AuthProviderLoginData'
 
 class LoginContainer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            emailAddressValue: '',
-            passwordValue: '',
-            hasError: false
-        }
+    state = {
+        emailAddressValue: '',
+        passwordValue: '',
+        hasError: false
+    }
+
+    static propTypes = {
+        onLogin: PropTypes.func.isRequired
     }
 
     handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
@@ -44,21 +46,21 @@ class LoginContainer extends Component {
     }
 
     render() {
+        const { emailAddressValue, passwordValue, hasError, error } = this.state
         const loginProps = {
-            emailAddressValue: this.state.emailAddressValue,
-            passwordValue: this.state.passwordValue,
+            emailAddressValue,
+            passwordValue,
             handleTextFieldChange: this.handleTextFieldChange,
             handleOnLoginPress: this.handleOnLoginPress,
-            hasError: this.state.hasError,
-            error: this.state.error
+            hasError,
+            error
         }
-        return this.props.isLoggedIn ? <Redirect to="/newest" /> : <LoginForm {...loginProps} />
+        return (
+            <AuthContext.Consumer>
+                {({ isLoggedIn }) => (isLoggedIn ? <Redirect to="/newest" /> : <LoginForm {...loginProps} />)}
+            </AuthContext.Consumer>
+        )
     }
-}
-
-LoginContainer.propTypes = {
-    onLogin: PropTypes.func.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired
 }
 
 export default graphql(Login)(LoginContainer)
