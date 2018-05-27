@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
-import AuthContext from 'contexts/AuthContext'
 import { graphql } from 'react-apollo'
 import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
@@ -49,31 +48,27 @@ class App extends Component {
         const { onLogin, onLogout } = this.props
         const { ethToUsdRate } = this.state
         return (
-            <AuthContext.Consumer>
-                {({ isLoggedIn, storedUserId }) => (
-                    <div className="App">
-                        <Router>
-                            <div>
-                                <Navigation />
-                                <Route exact path="/" component={Home} />
-                                <Route
-                                    path="/newest"
-                                    render={props => <NewsFeedContainer {...props} ethToUsdRate={ethToUsdRate} />}
-                                />
-                                <Route path="/signup" component={SignupContainer} />
-                                <Route path="/login" render={() => <LoginContainer onLogin={onLogin} />} />
-                                <Route path="/create-post" component={CreateNewsItemContainer} />
-                                <Route
-                                    path="/news-item-detail"
-                                    render={props => <NewsItemDetailView {...props} ethToUsdRate={ethToUsdRate} />}
-                                />
-                                <Route path="/submissions" component={Submissions} />
-                                <Route path="/logout" render={() => <Logout onLogout={onLogout} />} />
-                            </div>
-                        </Router>
+            <div className="App">
+                <Router>
+                    <div>
+                        <Navigation />
+                        <Route exact path="/" component={Home} />
+                        <Route
+                            path="/newest"
+                            render={props => <NewsFeedContainer {...props} ethToUsdRate={ethToUsdRate} />}
+                        />
+                        <Route path="/signup" component={SignupContainer} />
+                        <Route path="/login" render={() => <LoginContainer onLogin={onLogin} />} />
+                        <Route path="/create-post" component={CreateNewsItemContainer} />
+                        <Route
+                            path="/news-item-detail"
+                            render={props => <NewsItemDetailView {...props} ethToUsdRate={ethToUsdRate} />}
+                        />
+                        <Route path="/submissions" component={Submissions} />
+                        <Route path="/logout" render={() => <Logout onLogout={onLogout} />} />
                     </div>
-                )}
-            </AuthContext.Consumer>
+                </Router>
+            </div>
         )
     }
 }
