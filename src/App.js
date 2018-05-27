@@ -62,12 +62,7 @@ class App extends Component {
                                 />
                                 <Route path="/signup" component={SignupContainer} />
                                 <Route path="/login" render={() => <LoginContainer onLogin={onLogin} />} />
-                                <Route
-                                    path="/create-post"
-                                    render={() => (
-                                        <CreateNewsItemContainer userId={storedUserId} isLoggedIn={isLoggedIn} />
-                                    )}
-                                />
+                                <Route path="/create-post" component={CreateNewsItemContainer} />
                                 <Route
                                     path="/news-item-detail"
                                     render={props => <NewsItemDetailView {...props} ethToUsdRate={ethToUsdRate} />}
