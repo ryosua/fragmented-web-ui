@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation renders correctlyt 1`] = `
+<Uncontrolled(Navbar)
+  bsStyle="default"
+  inverse={true}
+>
+  <NavbarHeader>
+    <NavbarBrand>
+      <a
+        href="/newest"
+      >
+        Fragmented
+      </a>
+    </NavbarBrand>
+    <NavbarToggle />
+  </NavbarHeader>
+  <NavbarCollapse>
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
+    >
+      <NavItem
+        active={false}
+        disabled={false}
+        href="http://www.ryanyosua.me/decentralized-social-network/"
+      >
+        About
+      </NavItem>
+      <NavItem
+        active={false}
+        disabled={false}
+        href="http://www.ryanyosua.me/"
+      >
+        Blog
+      </NavItem>
+      <NavDropdown
+        id="basic-nav-dropdown"
+        title="Account"
+      >
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/signup"
+        >
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            header={false}
+          >
+            Signup
+          </MenuItem>
+        </LinkContainer>
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/login"
+        >
+          <MenuItem
+            bsClass="dropdown"
+            disabled={false}
+            divider={false}
+            header={false}
+          >
+            Login
+          </MenuItem>
+        </LinkContainer>
+      </NavDropdown>
+    </Nav>
+  </NavbarCollapse>
+</Uncontrolled(Navbar)>
+`;

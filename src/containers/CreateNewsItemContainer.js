@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 import { graphql } from 'react-apollo'
 import map from 'lodash/map'
 import text from 'util/text'
+import AuthContext from 'contexts/AuthContext'
 import CreateLinkNewsItem from 'graphql/mutations/CreateLinkNewsItem'
 import NewsItemType from 'graphql/enums/NewsItemType'
 import CreateLinkNewsItemForm from 'components/CreateLinkNewsItemForm'
@@ -48,7 +48,7 @@ class CreateNewsItemContainer extends React.Component {
 
     handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
 
-    handleSubmitPress = () => {
+    handleSubmitPress = userId => () => {
         const validTitle = validateEntry(this.state.titleValue)
         if (!validTitle) {
             this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidTitle })
@@ -74,7 +74,7 @@ class CreateNewsItemContainer extends React.Component {
         this.props
             .mutate({
                 variables: {
-                    userId: this.props.userId,
+                    userId: userId,
                     creationTime: new Date(),
                     title: this.state.titleValue,
                     url: this.state.urlValue,
@@ -94,44 +94,45 @@ class CreateNewsItemContainer extends React.Component {
     }
 
     render() {
-        const createNewsItemProps = {
-            titleValue: this.state.titleValue,
-            urlValue: this.state.urlValue,
-            textValue: this.state.textValue,
-            handleTextFieldChange: this.handleTextFieldChange,
-            handleSubmitPress: this.handleSubmitPress,
-            hasError: this.state.hasError,
-            error: this.state.error,
-            errorMessage: this.state.errorMessage
-        }
         return (
-            <div>
-                {(!this.props.isLoggedIn || this.state.postSubmitted) && <Redirect to="/newest" />}
-                <CenteredColumn>
-                    <Container>
-                        <CreatePostHeader
-                            pageTitle={valueToType[this.state.postTypeSelectedValue].title}
-                            postTypeMapping={postTypeMapping}
-                            postTypeSelectedValue={this.state.postTypeSelectedValue}
-                            onPostTypeSelect={this.onPostTypeSelect}
-                        />
-                        <br />
-                        {this.getPostType() === NewsItemType.LINK && (
-                            <CreateLinkNewsItemForm {...createNewsItemProps} />
-                        )}
-                        {this.getPostType() === NewsItemType.TEXT && (
-                            <CreateTextNewsItemForm {...createNewsItemProps} />
-                        )}
-                    </Container>
-                </CenteredColumn>
-            </div>
+            <AuthContext.Consumer>
+                {({ isLoggedIn, storedUserId }) => {
+                    const createNewsItemProps = {
+                        titleValue: this.state.titleValue,
+                        urlValue: this.state.urlValue,
+                        textValue: this.state.textValue,
+                        handleTextFieldChange: this.handleTextFieldChange,
+                        handleSubmitPress: this.handleSubmitPress(storedUserId),
+                        hasError: this.state.hasError,
+                        error: this.state.error,
+                        errorMessage: this.state.errorMessage
+                    }
+                    return (
+                        <div>
+                            {(!isLoggedIn || this.state.postSubmitted) && <Redirect to="/newest" />}
+                            <CenteredColumn>
+                                <Container>
+                                    <CreatePostHeader
+                                        pageTitle={valueToType[this.state.postTypeSelectedValue].title}
+                                        postTypeMapping={postTypeMapping}
+                                        postTypeSelectedValue={this.state.postTypeSelectedValue}
+                                        onPostTypeSelect={this.onPostTypeSelect}
+                                    />
+                                    <br />
+                                    {this.getPostType() === NewsItemType.LINK && (
+                                        <CreateLinkNewsItemForm {...createNewsItemProps} />
+                                    )}
+                                    {this.getPostType() === NewsItemType.TEXT && (
+                                        <CreateTextNewsItemForm {...createNewsItemProps} />
+                                    )}
+                                </Container>
+                            </CenteredColumn>
+                        </div>
+                    )
+                }}
+            </AuthContext.Consumer>
         )
     }
-}
-
-CreateNewsItemContainer.propTypes = {
-    isLoggedIn: PropTypes.bool,
-    userId: PropTypes.string
 }
 
 export default graphql(CreateLinkNewsItem)(CreateNewsItemContainer)

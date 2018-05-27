@@ -3,18 +3,18 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "apollo-cache-inmemory": "1.1.0",
-        "apollo-client": "2.0.2",
+        "apollo-cache-inmemory": "1.2.1",
+        "apollo-client": "2.3.1",
         "apollo-link-http": "1.1.0",
         "gh-pages": "1.0.0",
         "graphql": "0.11.7",
-        "graphql-tag": "2.5.0",
+        "graphql-tag": "2.9.2",
         "lodash": "4.17.4",
         "query-string": "5.0.1",
-        "react": "16.2.0",
-        "react-apollo": "2.0.1",
+        "react": "16.4.0",
+        "react-apollo": "2.1.4",
         "react-bootstrap": "0.31.5",
-        "react-dom": "16.1.1",
+        "react-dom": "16.4.0",
         "react-markdown": "3.1.5",
         "react-router-bootstrap": "0.24.4",
         "react-router-dom": "4.2.2",
@@ -30,5 +30,10 @@
         "eject": "react-scripts eject",
         "predeploy": "yarn run build",
         "deploy": "yarn run build && ren .\\build\\index.html \"200.html\" && surge ./build beta.fragmented.world"
+    },
+    "devDependencies": {
+        "enzyme": "3.3.0",
+        "enzyme-adapter-react-16": "1.1.1",
+        "react-test-renderer": "16.4.0"
     }
 }
