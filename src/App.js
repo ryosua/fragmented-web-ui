@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import 'App.css'
+import noop from 'lodash/noop'
 import { graphql } from 'react-apollo'
 import Home from 'components/Home'
 import NewsFeedContainer from 'containers/NewsFeedContainer'
@@ -39,9 +40,7 @@ class App extends Component {
             .then(rate => {
                 this.setState({ ethToUsdRate: rate })
             })
-            .catch(error => {
-                console.log('error getting conversion rate')
-            })
+            .catch(noop)
     }
 
     render() {

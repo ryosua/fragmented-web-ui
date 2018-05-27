@@ -59,7 +59,6 @@ class SignupContainer extends Component {
                 }
             })
             .then(({ data }) => {
-                console.log('got data', data)
                 const state = {
                     emailAddressValue: '',
                     usernameValue: '',
@@ -71,7 +70,6 @@ class SignupContainer extends Component {
                 this.setState(state)
             })
             .catch(error => {
-                console.log('there was an error sending the query', error)
                 this.setState({ hasError: true, error: error })
             })
     }

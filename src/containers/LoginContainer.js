@@ -28,7 +28,6 @@ class LoginContainer extends Component {
                 }
             })
             .then(({ data }) => {
-                console.log('got data', data)
                 const state = {
                     emailAddressValue: '',
                     usernameValue: '',
@@ -40,7 +39,6 @@ class LoginContainer extends Component {
                 this.props.onLogin(data)
             })
             .catch(error => {
-                console.log('there was an error sending the query', JSON.stringify(error))
                 this.setState({ hasError: true, error: error })
             })
     }
