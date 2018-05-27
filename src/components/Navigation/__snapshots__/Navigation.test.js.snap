@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation renders correctlyt 1`] = `
+exports[`Navigation renders correctly 1`] = `
 <Uncontrolled(Navbar)
   bsStyle="default"
   inverse={true}
