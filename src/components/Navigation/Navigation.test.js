@@ -2,15 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import noop from 'lodash/noop'
 import Navigation from 'components/Navigation'
-import { shallow } from 'enzyme'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
-// Move this to setup file and eject the app
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-configure({ adapter: new Adapter() })
-
-it('Navigation renders correctly', () => {
-    const wrapper = shallow(
+it('Navigation renders correctlyt', () => {
+    const renderer = new ShallowRenderer()
+    const result = renderer.render(
         <Navigation
             isLoggedIn={false}
             notTippable={false}
@@ -18,5 +14,5 @@ it('Navigation renders correctly', () => {
             setShowRegisterAddressModal={noop}
         />
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(result).toMatchSnapshot()
 })
