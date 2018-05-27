@@ -27,11 +27,9 @@ class RegisterPublicAddressModal extends React.Component {
             .mutate({ variables: { id: this.props.user.id, publicAddress } })
             .then(({ data }) => {
                 this.setState({ linkingAccount: false })
-                console.log('registered address from Modal')
             })
             .catch(error => {
                 this.setState({ linkingAccount: false })
-                console.log(error)
             })
     }, 1000)
 

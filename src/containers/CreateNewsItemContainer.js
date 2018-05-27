@@ -83,12 +83,10 @@ class CreateNewsItemContainer extends React.Component {
                 }
             })
             .then(({ data }) => {
-                console.log('got data', data)
                 const state = { postSubmitted: true, hasError: false }
                 this.setState(state)
             })
             .catch(error => {
-                console.log('there was an error sending the query', JSON.stringify(error))
                 this.setState({ hasError: true, error: error })
             })
     }

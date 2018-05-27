@@ -53,11 +53,9 @@ class PostCommentFormContainer extends Component {
             }
         })
             .then(({ data }) => {
-                console.log('got data', JSON.stringify(data))
                 this.setState({ commentText: '' })
             })
             .catch(error => {
-                console.log('there was an error sending the query', JSON.stringify(error))
                 this.setState({ hasError: true, error: error })
             })
     }
