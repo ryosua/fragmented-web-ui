@@ -40,28 +40,31 @@ contract Curation {
         return false;
     }
     
-    function createPost(string _id) external {
+    function createPost(string _id) external returns(string) {
         require(!postExists(_id));
         Post memory newPost = Post(_id, new address[](0), new address[](0));
         posts.push(newPost);
         idToPost[_id] = newPost;
         emit PostCreated(msg.sender, _id);
+        return newPost.id;
     }
 
-    function upVotePost(string _id) external {
+    function upVotePost(string _id) external returns(string) {
         require(postExists(_id));
         Post storage post = idToPost[_id];
         require(!containsAddress(msg.sender, post.upVoters));
         post.upVoters.push(msg.sender);
         emit PostUpVoted(msg.sender, _id);
+        return post.id;
     }
 
-    function downVotePost(string _id) external {
+    function downVotePost(string _id) external returns(string) {
         require(postExists(_id));
         Post storage post = idToPost[_id];
         require (!containsAddress(msg.sender, post.downVoters));
         post.downVoters.push(msg.sender);
         emit PostDownVoted(msg.sender, _id);
+        return post.id;
     }
 
     function getPostScore(string _id) external view returns(uint) {
