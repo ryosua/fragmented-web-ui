@@ -41,7 +41,7 @@ contract Curation {
     }
     
     function createPost(string _id) external returns(string) {
-        require(!postExists(_id));
+        require(!postExists(_id), "Cannot create a post with exsiting id.");
         Post memory newPost = Post(_id, new address[](0), new address[](0));
         posts.push(newPost);
         idToPost[_id] = newPost;
@@ -50,7 +50,7 @@ contract Curation {
     }
 
     function upVotePost(string _id) external returns(string) {
-        require(postExists(_id));
+        require(postExists(_id), "Cannot upVote a post that does not exsist.");
         Post storage post = idToPost[_id];
         require(!containsAddress(msg.sender, post.upVoters));
         post.upVoters.push(msg.sender);
@@ -59,7 +59,7 @@ contract Curation {
     }
 
     function downVotePost(string _id) external returns(string) {
-        require(postExists(_id));
+        require(postExists(_id), "Cannot downVote a post that does not exsist.");
         Post storage post = idToPost[_id];
         require (!containsAddress(msg.sender, post.downVoters));
         post.downVoters.push(msg.sender);
