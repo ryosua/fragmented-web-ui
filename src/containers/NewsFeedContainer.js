@@ -15,18 +15,18 @@ const renderHR = (listLength, index) => {
     }
 }
 
-const NewsFeedContainer = props => {
-    if (props.loading) {
+const NewsFeedContainer = ({ loading, error, allNewsItems, ethToUsdRate, loadMoreEntries }) => {
+    if (loading) {
         return <p>{text.NewsFeed.loading}</p>
     }
 
-    if (props.error) {
+    if (error) {
         return <p> {text.networkErrorMessages.newsFeedLoad}</p>
     }
 
     return (
         <div>
-            {map(props.allNewsItems, (newsItem, index) => (
+            {map(allNewsItems, (newsItem, index) => (
                 <div key={newsItem.id}>
                     {newsItem.type === 'LINK' ? (
                         <LinkNewsItem
@@ -37,7 +37,7 @@ const NewsFeedContainer = props => {
                             comments={newsItem.comments}
                             type={newsItem.type}
                             author={newsItem.user}
-                            ethToUsdRate={props.ethToUsdRate}
+                            ethToUsdRate={ethToUsdRate}
                         />
                     ) : (
                         <TextNewsItemFeedItem
@@ -48,13 +48,13 @@ const NewsFeedContainer = props => {
                             comments={newsItem.comments}
                             type={newsItem.type}
                             author={newsItem.user}
-                            ethToUsdRate={props.ethToUsdRate}
+                            ethToUsdRate={ethToUsdRate}
                         />
                     )}
-                    {renderHR(props.allNewsItems.length, index)}
+                    {renderHR(allNewsItems.length, index)}
                 </div>
             ))}
-            <ActionButton label="Load more" onClick={props.loadMoreEntries} />
+            <ActionButton label="Load more" onClick={loadMoreEntries} />
         </div>
     )
 }
