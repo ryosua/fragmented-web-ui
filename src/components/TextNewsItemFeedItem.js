@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom'
 import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
 
 const TextNewsItemFeedItem = props => {
+    const { id, index, title, comments, author, ethToUsdRate } = props
     return (
         <div>
             <h2>
-                <Link to={{ pathname: '/news-item-detail', search: `?id=${props.id}`, state: props }}>{`${props.index +
-                    1}. ${props.title}`}</Link>
+                <Link to={{ pathname: '/news-item-detail', search: `?id=${id}`, state: props }}>{`${index +
+                    1}. ${title}`}</Link>
             </h2>
             <NewsFeedItemDetail
-                id={props.id}
-                comments={props.comments}
-                author={props.author}
+                id={id}
+                comments={comments}
+                author={author}
                 pathname="/news-item-detail"
-                ethToUsdRate={props.ethToUsdRate}
+                ethToUsdRate={ethToUsdRate}
             />
         </div>
     )

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 
-const Logout = props => {
-    props.onLogout()
+const Logout = ({ onLogout }) => {
+    onLogout()
     return <Redirect to="/newest" />
 }
 

@@ -13,6 +13,7 @@ const fieldNames = {
 }
 
 const CreateLinkNewsItemForm = props => {
+    const { handleTextFieldChange, handleSubmitPress, hasError, error, errorMessage } = props
     return (
         <div>
             <FormField
@@ -20,19 +21,19 @@ const CreateLinkNewsItemForm = props => {
                 type="text"
                 placeholder={text.Posting.postTitlePlaceholder}
                 value={props[fieldNames.title]}
-                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.title)}
+                onChange={onchangeHandler(handleTextFieldChange, fieldNames.title)}
             />
             <FormField
                 label={text.Posting.urlLabel}
                 type="text"
                 placeholder={text.Posting.urlPlaceholder}
                 value={props[fieldNames.url]}
-                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.url)}
+                onChange={onchangeHandler(handleTextFieldChange, fieldNames.url)}
             />
             <br />
-            <ActionButton label="Submit" onClick={props.handleSubmitPress} />
+            <ActionButton label="Submit" onClick={handleSubmitPress} />
             <br />
-            {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
+            {hasError && <ErrorComponent error={error} errorMessage={errorMessage} />}
         </div>
     )
 }

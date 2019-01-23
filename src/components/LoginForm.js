@@ -21,6 +21,7 @@ const MiddleColumn = FlexColumn.extend`
 `
 
 const LoginForm = props => {
+    const { handleTextFieldChange, handleOnLoginPress, hasError, error } = props
     return (
         <CenteredColumn>
             <h2>{text.Login.title}</h2>
@@ -31,19 +32,19 @@ const LoginForm = props => {
                         type="email"
                         placeholder={text.Login.emailPlaceholder}
                         value={props[fieldNames.email]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.email)}
                     />
                     <FormField
                         label={text.Login.passwordLabel}
                         type="password"
                         placeholder={text.Login.passwordPlaceholder}
                         value={props[fieldNames.password]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.password)}
                     />
                     <br />
-                    <ActionButton label="Login" onClick={props.handleOnLoginPress} />
+                    <ActionButton label="Login" onClick={handleOnLoginPress} />
                     <br />
-                    {props.hasError && <ErrorComponent error={props.error} />}
+                    {hasError && <ErrorComponent error={error} />}
                 </MiddleColumn>
             </ShadowBox>
         </CenteredColumn>

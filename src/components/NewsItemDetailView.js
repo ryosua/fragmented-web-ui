@@ -34,13 +34,14 @@ const Error = () => {
 }
 
 const NewsItemDetailView = props => {
-    const isLoading = props.data && props.data.loading
+    const { data } = props
+    const isLoading = data && data.loading
     if (isLoading) {
         return <Loading />
-    } else if (props.data && props.data.error) {
-        return props.data ? <Error error={props.data.error} /> : <Error />
+    } else if (data && data.error) {
+        return data ? <Error error={data.error} /> : <Error />
     }
-    return renderNewsItem(props.data.NewsItem, props)
+    return renderNewsItem(data.NewsItem, props)
 }
 
 NewsItemDetailView.propTypes = {

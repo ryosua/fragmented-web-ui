@@ -24,7 +24,6 @@ NewsFeedItemDetail.propTypes = {
     comments: PropTypes.array.isRequired,
     author: PropTypes.object.isRequired,
     pathname: PropTypes.string.isRequired,
-    state: PropTypes.object,
     ethToUsdRate: PropTypes.number
 }
 

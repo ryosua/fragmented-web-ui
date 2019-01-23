@@ -5,12 +5,12 @@ import text from 'util/text'
 import PostCommentFormContainer from 'containers/PostCommentFormContainer'
 
 const CommentList = props => {
-    const { comments } = props
+    const { comments, newsItemId } = props
     const { commentsHeader, noCommentsHeader } = text.Comments
     return (
         <div>
             <h3>{comments.length > 0 ? commentsHeader : noCommentsHeader}</h3>
-            <PostCommentFormContainer newsItemId={props.newsItemId} />
+            <PostCommentFormContainer newsItemId={newsItemId} />
             {map(comments, (comment, index) => (
                 <div key={comment.id}>
                     <p>{`${comment.user.username}:`}</p>

@@ -14,6 +14,7 @@ const fieldNames = {
 }
 
 const CreateTextNewsItemForm = props => {
+    const { handleTextFieldChange, textValue, handleSubmitPress, hasError, error, errorMessage } = props
     return (
         <div>
             <FormField
@@ -21,22 +22,22 @@ const CreateTextNewsItemForm = props => {
                 type="text"
                 placeholder={text.Posting.postTitlePlaceholder}
                 value={props[fieldNames.title]}
-                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.title)}
+                onChange={onchangeHandler(handleTextFieldChange, fieldNames.title)}
             />
             <FormField
                 label={text.Posting.textLabel}
                 type="textarea"
                 placeholder={text.Posting.textPlaceholder}
                 value={props[fieldNames.text]}
-                onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.text)}
+                onChange={onchangeHandler(handleTextFieldChange, fieldNames.text)}
             />
             <a href="http://commonmark.org/">Markdown supported</a>
             <br />
             <h4>Preview:</h4>
-            <ReactMarkdown source={props.textValue} />
-            <ActionButton label="Submit" onClick={props.handleSubmitPress} />
+            <ReactMarkdown source={textValue} />
+            <ActionButton label="Submit" onClick={handleSubmitPress} />
             <br />
-            {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
+            {hasError && <ErrorComponent error={error} errorMessage={errorMessage} />}
         </div>
     )
 }

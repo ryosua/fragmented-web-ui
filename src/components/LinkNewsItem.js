@@ -2,18 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
 
-const LinkNewsItem = props => (
+const LinkNewsItem = ({ url, index, title, id, comments, ethToUsdRate, author }) => (
     <div>
         <h2>
-            <a href={props.url}>{`${props.index + 1}. ${props.title}`}</a>
+            <a href={url}>{`${index + 1}. ${title}`}</a>
         </h2>
         <NewsFeedItemDetail
-            id={props.id}
-            comments={props.comments}
-            author={props.author}
+            id={id}
+            comments={comments}
+            author={author}
             pathname="/news-item-detail"
-            state={props}
-            ethToUsdRate={props.ethToUsdRate}
+            ethToUsdRate={ethToUsdRate}
         />
     </div>
 )

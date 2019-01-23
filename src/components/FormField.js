@@ -2,17 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ControlLabel, FormControl } from 'react-bootstrap'
 
-const FormField = props => {
-    const componentClass = props.type === 'textarea' ? 'textarea' : 'input'
+const FormField = ({ type, label, value, onChange, placeholder }) => {
+    const componentClass = type === 'textarea' ? 'textarea' : 'input'
     return (
         <div>
-            {props.label && <ControlLabel>{props.label}</ControlLabel>}
+            {label && <ControlLabel>{label}</ControlLabel>}
             <FormControl
-                type={props.type}
+                type={type}
                 componentClass={componentClass}
-                placeholder={props.placeholder}
-                value={props.value}
-                onChange={props.onChange}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
             />
         </div>
     )

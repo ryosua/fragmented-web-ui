@@ -24,7 +24,9 @@ const fieldNames = {
 }
 
 const Signup = props => {
-    if (props.signupSuccessful) {
+    const { signupSuccessful, handleTextFieldChange, handleOnSignupPress, hasError, error, errorMessage } = props
+
+    if (signupSuccessful) {
         return <Redirect to="/login" />
     }
 
@@ -38,33 +40,33 @@ const Signup = props => {
                         type="email"
                         placeholder={text.Signup.emailPlaceholder}
                         value={props[fieldNames.email]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.email)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.email)}
                     />
                     <FormField
                         label={text.Signup.username}
                         type="text"
                         placeholder={text.Signup.usernamePlaceholder}
                         value={props[fieldNames.username]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.username)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.username)}
                     />
                     <FormField
                         label={text.Signup.passwordLabel}
                         type="password"
                         placeholder={text.Signup.passwordPlaceholder}
                         value={props[fieldNames.password]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.password)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.password)}
                     />
                     <FormField
                         label={text.Signup.passwordConfirmationLabel}
                         type="password"
                         placeholder={text.Signup.passwordConfirmationPlaceholder}
                         value={props[fieldNames.confirmPassword]}
-                        onChange={onchangeHandler(props.handleTextFieldChange, fieldNames.confirmPassword)}
+                        onChange={onchangeHandler(handleTextFieldChange, fieldNames.confirmPassword)}
                     />
                     <br />
-                    <ActionButton label="Create Account" onClick={props.handleOnSignupPress} />
+                    <ActionButton label="Create Account" onClick={handleOnSignupPress} />
                     <br />
-                    {props.hasError && <ErrorComponent error={props.error} errorMessage={props.errorMessage} />}
+                    {hasError && <ErrorComponent error={error} errorMessage={errorMessage} />}
                 </MiddleColumn>
             </ShadowBox>
         </CenteredColumn>
