@@ -13,15 +13,12 @@ const MINIMUM_CHARACTERS_FOR_PASSWORDS = 9
 const validatePasswordRequirementsMet = password => password.length >= MINIMUM_CHARACTERS_FOR_PASSWORDS
 
 class SignupContainer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            emailAddressValue: '',
-            usernameValue: '',
-            passwordValue: '',
-            confirmPasswordValue: '',
-            hasError: false
-        }
+    state = {
+        emailAddressValue: '',
+        usernameValue: '',
+        passwordValue: '',
+        confirmPasswordValue: '',
+        hasError: false
     }
 
     handleTextFieldChange = (e, fieldName) => {
