@@ -47,23 +47,24 @@ class CreateNewsItemContainer extends React.Component {
     handleTextFieldChange = (e, fieldName) => this.setState({ [fieldName]: e.target.value })
 
     handleSubmitPress = userId => () => {
-        const validTitle = validateEntry(this.state.titleValue)
+        const { titleValue, urlValue, textValue } = this.state
+        const validTitle = validateEntry(titleValue)
         if (!validTitle) {
             this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidTitle })
             return
         }
 
         if (this.getPostType() === NewsItemType.LINK) {
-            const urlValue = validateEntry(this.state.urlValue)
-            if (!urlValue) {
+            const validUrlValue = validateEntry(urlValue)
+            if (!validUrlValue) {
                 this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidUrl })
                 return
             }
         }
 
         if (this.getPostType() === NewsItemType.TEXT) {
-            const textValue = validateEntry(this.state.textValue)
-            if (!textValue) {
+            const validTextValue = validateEntry(textValue)
+            if (!validTextValue) {
                 this.setState({ hasError: true, errorMessage: clientErrorMessages.invalidText })
                 return
             }
@@ -74,9 +75,9 @@ class CreateNewsItemContainer extends React.Component {
                 variables: {
                     userId: userId,
                     creationTime: new Date(),
-                    title: this.state.titleValue,
-                    url: this.state.urlValue,
-                    text: this.state.textValue,
+                    title: titleValue,
+                    url: urlValue,
+                    text: textValue,
                     type: this.getPostType()
                 }
             })
@@ -85,7 +86,7 @@ class CreateNewsItemContainer extends React.Component {
                 this.setState(state)
             })
             .catch(error => {
-                this.setState({ hasError: true, error: error })
+                this.setState({ hasError: true, error })
             })
     }
 
@@ -93,25 +94,37 @@ class CreateNewsItemContainer extends React.Component {
         return (
             <AuthContext.Consumer>
                 {({ isLoggedIn, storedUserId }) => {
+                    const {
+                        titleValue,
+                        urlValue,
+                        textValue,
+                        hasError,
+                        error,
+                        errorMessage,
+                        postSubmitted,
+                        postTypeSelectedValue
+                    } = this.state
+
                     const createNewsItemProps = {
-                        titleValue: this.state.titleValue,
-                        urlValue: this.state.urlValue,
-                        textValue: this.state.textValue,
+                        titleValue,
+                        urlValue,
+                        textValue,
                         handleTextFieldChange: this.handleTextFieldChange,
                         handleSubmitPress: this.handleSubmitPress(storedUserId),
-                        hasError: this.state.hasError,
-                        error: this.state.error,
-                        errorMessage: this.state.errorMessage
+                        hasError,
+                        error,
+                        errorMessage
                     }
+
                     return (
                         <div>
-                            {(!isLoggedIn || this.state.postSubmitted) && <Redirect to="/newest" />}
+                            {(!isLoggedIn || postSubmitted) && <Redirect to="/newest" />}
                             <CenteredColumn>
                                 <Container>
                                     <CreatePostHeader
-                                        pageTitle={valueToType[this.state.postTypeSelectedValue].title}
+                                        pageTitle={valueToType[postTypeSelectedValue].title}
                                         postTypeMapping={postTypeMapping}
-                                        postTypeSelectedValue={this.state.postTypeSelectedValue}
+                                        postTypeSelectedValue={postTypeSelectedValue}
                                         onPostTypeSelect={this.onPostTypeSelect}
                                     />
                                     <br />
