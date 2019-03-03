@@ -27,9 +27,7 @@
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
         "test": "react-app-rewired test --env=jsdom",
-        "eject": "react-scripts eject",
-        "predeploy": "yarn run build",
-        "deploy": "yarn run build && ren .\\build\\index.html \"200.html\" && surge ./build beta.fragmented.world"
+        "eject": "react-scripts eject"
     },
     "devDependencies": {
         "enzyme": "3.3.0",
