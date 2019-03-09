@@ -34,12 +34,11 @@ const Navigation = ({ isLoggedIn, notTippable, showRegisterAddressModal, setShow
                             <MenuItem>{text.Submissions.title}</MenuItem>
                         </LinkContainer>
                     )}
-                    {isLoggedIn &&
-                        notTippable && (
-                            <MenuItem onSelect={() => setShowRegisterAddressModal(!showRegisterAddressModal)}>
-                                {text.Tipping.unlinkedAccountNavHelp}
-                            </MenuItem>
-                        )}
+                    {isLoggedIn && notTippable && (
+                        <MenuItem onSelect={() => setShowRegisterAddressModal(!showRegisterAddressModal)}>
+                            {text.Tipping.unlinkedAccountNavHelp}
+                        </MenuItem>
+                    )}
                     {isLoggedIn && (
                         <LinkContainer to="/logout">
                             <MenuItem>{text.app.logout}</MenuItem>
