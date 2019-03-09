@@ -8,9 +8,6 @@ import RegisterPublicAddressModal from 'containers/RegisterPublicAddressModal'
 const Navigation = ({ isLoggedIn, notTippable, showRegisterAddressModal, setShowRegisterAddressModal, user }) => (
     <Navbar inverse>
         <Navbar.Header>
-            <Navbar.Brand>
-                <a href="/newest">{text.app.name}</a>
-            </Navbar.Brand>
             <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>

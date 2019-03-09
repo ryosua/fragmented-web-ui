@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import 'App.css'
 import noop from 'lodash/noop'
 import { graphql } from 'react-apollo'
 import { Main } from '@aragon/ui'
-import Home from 'components/Home'
-import NewsFeedContainer from 'containers/NewsFeedContainer'
-import NavigationContainer from 'containers/NavigationContainer'
-import LoginContainer from 'containers/LoginContainer'
-import SignupContainer from 'containers/SignupContainer'
-import Submissions from 'components/Submissions'
-import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
-import Logout from 'components/Logout'
-import NewsItemDetailView from 'components/NewsItemDetailView'
 import UpdateUserPublicAddress from 'graphql/mutations/UpdateUserPublicAddress'
 import getPublicAddressFromContext from 'util/getPublicAddressFromContext'
 import getConversionRate from 'util/getConversionRate'
+import AppUI from './AppUI'
 
 class App extends Component {
     state = {}
@@ -48,29 +40,13 @@ class App extends Component {
         const { onLogin, onLogout } = this.props
         const { ethToUsdRate } = this.state
         return (
-            <Main>
-                <div className="App">
+            <div className="App">
+                <Main>
                     <Router>
-                        <div>
-                            <NavigationContainer />
-                            <Route exact path="/" component={Home} />
-                            <Route
-                                path="/newest"
-                                render={props => <NewsFeedContainer {...props} ethToUsdRate={ethToUsdRate} />}
-                            />
-                            <Route path="/signup" component={SignupContainer} />
-                            <Route path="/login" render={() => <LoginContainer onLogin={onLogin} />} />
-                            <Route path="/create-post" component={CreateNewsItemContainer} />
-                            <Route
-                                path="/news-item-detail"
-                                render={props => <NewsItemDetailView {...props} ethToUsdRate={ethToUsdRate} />}
-                            />
-                            <Route path="/submissions" component={Submissions} />
-                            <Route path="/logout" render={() => <Logout onLogout={onLogout} />} />
-                        </div>
+                        <AppUI ethToUsdRate={ethToUsdRate} onLogin={onLogin} onLogout={onLogout} />
                     </Router>
-                </div>
-            </Main>
+                </Main>
+            </div>
         )
     }
 }
