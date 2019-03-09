@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router'
 import { graphql } from 'react-apollo'
+import styled from 'styled-components'
 import map from 'lodash/map'
 import text from 'util/text'
 import AuthContext from 'contexts/AuthContext'
@@ -16,7 +17,7 @@ const clientErrorMessages = text.clientErrorMessages
 
 const validateEntry = value => value !== ''
 
-const Container = FlexColumn.extend`
+const Container = styled(FlexColumn)`
     width: 75%;
     padding: 20px;
 `

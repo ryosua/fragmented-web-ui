@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import ErrorComponent from 'util/ErrorHandler'
 import { Redirect } from 'react-router'
 import FormField from 'components/FormField'
@@ -9,7 +10,7 @@ import CenteredColumn from 'styles/CenteredColumn'
 import ShadowBox from 'styles/ShadowBox'
 import FlexColumn from 'styles/FlexColumn'
 
-const MiddleColumn = FlexColumn.extend`
+const MiddleColumn = styled(FlexColumn)`
     width: 300px;
     padding: 20px;
 `

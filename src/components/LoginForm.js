@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import ErrorComponent from 'util/ErrorHandler'
 import FormField from 'components/FormField'
 import ActionButton from 'components/ActionButton'
@@ -15,7 +16,7 @@ const fieldNames = {
     password: 'passwordValue'
 }
 
-const MiddleColumn = FlexColumn.extend`
+const MiddleColumn = styled(FlexColumn)`
     width: 300px;
     padding: 20px;
 `
