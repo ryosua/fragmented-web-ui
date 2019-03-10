@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap'
+import { Button } from '@aragon/ui'
 
 const ActionButton = ({ label, onClick, disabled }) => (
-    <Button type="submit" onClick={onClick} disabled={disabled}>
+    <Button onClick={onClick} disabled={disabled} mode="outline">
         {label}
     </Button>
 )
