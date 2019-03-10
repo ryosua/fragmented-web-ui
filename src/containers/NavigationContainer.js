@@ -2,16 +2,20 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import get from 'lodash/get'
 import AuthContext from 'contexts/AuthContext'
-import Navigation from 'components/Navigation'
+import AragonNavigation from 'components/Navigation/AragonNavigation'
 import GetUser from 'graphql/queries/GetUser'
+import text from 'util/text'
 
 class NavigationContainer extends React.Component {
-    state = { showRegisterAddressModal: false }
+    state = {
+        showRegisterAddressModal: false,
+        navigationItems: [text.Signup.title, text.Login.title, text.Submissions.title]
+    }
 
     setShowRegisterAddressModal = value => this.setState({ showRegisterAddressModal: value })
 
     render() {
-        const { showRegisterAddressModal } = this.state
+        const { showRegisterAddressModal, navigationItems } = this.state
         return (
             <AuthContext.Consumer>
                 {({ isLoggedIn, storedUserId }) => (
@@ -20,12 +24,13 @@ class NavigationContainer extends React.Component {
                             const user = get(data, 'User')
                             const notTippable = !!(user && !user.publicAddress)
                             return (
-                                <Navigation
+                                <AragonNavigation
                                     isLoggedIn={isLoggedIn}
                                     notTippable={notTippable}
                                     showRegisterAddressModal={showRegisterAddressModal}
                                     setShowRegisterAddressModal={this.setShowRegisterAddressModal}
                                     user={user}
+                                    navigationItems={navigationItems}
                                 />
                             )
                         }}

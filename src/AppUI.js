@@ -9,13 +9,12 @@ import Submissions from 'components/Submissions'
 import CreateNewsItemContainer from 'containers/CreateNewsItemContainer'
 import Logout from 'components/Logout'
 import NewsItemDetailView from 'components/NewsItemDetailView'
-import { AppView, AppBar } from '@aragon/ui'
-import { Route, withRouter } from 'react-router-dom'
+import { AppView } from '@aragon/ui'
+import { Route } from 'react-router-dom'
 
-const AppUI = ({ ethToUsdRate, onLogin, onLogout, history }) => (
-    <AppView appBar={<AppBar title="Fragmented" onTitleClick={() => history.push('/')} />}>
+const AppUI = ({ ethToUsdRate, onLogin, onLogout }) => (
+    <AppView appBar={<NavigationContainer />}>
         <div>
-            <NavigationContainer />
             <Route exact path="/" component={Home} />
             <Route path="/newest" render={props => <NewsFeedContainer {...props} ethToUsdRate={ethToUsdRate} />} />
             <Route path="/signup" component={SignupContainer} />
@@ -40,4 +39,4 @@ AppUI.propTypes = {
     })
 }
 
-export default withRouter(AppUI)
+export default AppUI
