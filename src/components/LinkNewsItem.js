@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
+import NewsFeedItemWrapper from 'components/NewsFeedItemWrapper'
 
 const LinkNewsItem = ({ url, index, title, id, comments, ethToUsdRate, author }) => (
-    <div>
+    <NewsFeedItemWrapper>
         <h2>
             <a href={url}>{`${index + 1}. ${title}`}</a>
         </h2>
@@ -14,7 +15,7 @@ const LinkNewsItem = ({ url, index, title, id, comments, ethToUsdRate, author })
             pathname="/news-item-detail"
             ethToUsdRate={ethToUsdRate}
         />
-    </div>
+    </NewsFeedItemWrapper>
 )
 
 LinkNewsItem.propTypes = {

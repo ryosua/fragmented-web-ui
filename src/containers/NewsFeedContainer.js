@@ -9,12 +9,6 @@ import GetNewsFeed from 'graphql/queries/GetNewsFeed'
 import text from 'util/text'
 import last from 'lodash/last'
 
-const renderHR = (listLength, index) => {
-    if (index !== listLength - 1) {
-        return <hr />
-    }
-}
-
 const NewsFeedContainer = ({ loading, error, allNewsItems, ethToUsdRate, loadMoreEntries }) => {
     if (loading) {
         return <p>{text.NewsFeed.loading}</p>
@@ -51,7 +45,7 @@ const NewsFeedContainer = ({ loading, error, allNewsItems, ethToUsdRate, loadMor
                             ethToUsdRate={ethToUsdRate}
                         />
                     )}
-                    {renderHR(allNewsItems.length, index)}
+                    <br />
                 </div>
             ))}
             <ActionButton label="Load more" onClick={loadMoreEntries} />

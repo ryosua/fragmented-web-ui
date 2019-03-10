@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import NewsFeedItemDetail from 'containers/NewsFeedItemDetail'
+import NewsFeedItemWrapper from 'components/NewsFeedItemWrapper'
 
 const TextNewsItemFeedItem = props => {
     const { id, index, title, comments, author, ethToUsdRate } = props
     return (
-        <div>
+        <NewsFeedItemWrapper>
             <h2>
                 <Link to={{ pathname: '/news-item-detail', search: `?id=${id}`, state: props }}>{`${index +
                     1}. ${title}`}</Link>
@@ -18,7 +19,7 @@ const TextNewsItemFeedItem = props => {
                 pathname="/news-item-detail"
                 ethToUsdRate={ethToUsdRate}
             />
-        </div>
+        </NewsFeedItemWrapper>
     )
 }
 
